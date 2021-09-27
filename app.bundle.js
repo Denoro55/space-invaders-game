@@ -1,1 +1,3532 @@
-!function(e){function t(t){for(var i,o,r=t[0],h=t[1],c=t[2],d=0,u=[];d<r.length;d++)o=r[d],Object.prototype.hasOwnProperty.call(n,o)&&n[o]&&u.push(n[o][0]),n[o]=0;for(i in h)Object.prototype.hasOwnProperty.call(h,i)&&(e[i]=h[i]);for(l&&l(t);u.length;)u.shift()();return a.push.apply(a,c||[]),s()}function s(){for(var e,t=0;t<a.length;t++){for(var s=a[t],i=!0,r=1;r<s.length;r++){var h=s[r];0!==n[h]&&(i=!1)}i&&(a.splice(t--,1),e=o(o.s=s[0]))}return e}var i={},n={0:0},a=[];function o(t){if(i[t])return i[t].exports;var s=i[t]={i:t,l:!1,exports:{}};return e[t].call(s.exports,s,s.exports,o),s.l=!0,s.exports}o.m=e,o.c=i,o.d=function(e,t,s){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:s})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var s=Object.create(null);if(o.r(s),Object.defineProperty(s,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)o.d(s,i,function(t){return e[t]}.bind(null,i));return s},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="";var r=window.webpackJsonp=window.webpackJsonp||[],h=r.push.bind(r);r.push=t,r=r.slice();for(var c=0;c<r.length;c++)t(r[c]);var l=h;a.push([21,1]),s()}([function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.isDev=t.GAME_CONFIG=t.LEVELS_CONFIG=t.ENEMIES_CONFIG=t.CONFIG=void 0;var i=s(22);Object.defineProperty(t,"CONFIG",{enumerable:!0,get:function(){return i.CONFIG}});var n=s(19);Object.defineProperty(t,"ENEMIES_CONFIG",{enumerable:!0,get:function(){return n.ENEMIES_CONFIG}});var a=s(13);Object.defineProperty(t,"LEVELS_CONFIG",{enumerable:!0,get:function(){return a.LEVELS_CONFIG}});var o=s(17);Object.defineProperty(t,"GAME_CONFIG",{enumerable:!0,get:function(){return o.GAME_CONFIG}}),t.isDev=!1},function(e,t,s){"use strict";var i=this&&this.__createBinding||(Object.create?function(e,t,s,i){void 0===i&&(i=s),Object.defineProperty(e,i,{enumerable:!0,get:function(){return t[s]}})}:function(e,t,s,i){void 0===i&&(i=s),e[i]=t[s]}),n=this&&this.__exportStar||function(e,t){for(var s in e)"default"===s||Object.prototype.hasOwnProperty.call(t,s)||i(t,e,s)};Object.defineProperty(t,"__esModule",{value:!0}),n(s(28),t)},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Vector=void 0;var i=s(23);Object.defineProperty(t,"Vector",{enumerable:!0,get:function(){return i.Vector}})},function(e,t,s){"use strict";var i=this&&this.__createBinding||(Object.create?function(e,t,s,i){void 0===i&&(i=s),Object.defineProperty(e,i,{enumerable:!0,get:function(){return t[s]}})}:function(e,t,s,i){void 0===i&&(i=s),e[i]=t[s]}),n=this&&this.__exportStar||function(e,t){for(var s in e)"default"===s||Object.prototype.hasOwnProperty.call(t,s)||i(t,e,s)};Object.defineProperty(t,"__esModule",{value:!0}),n(s(25),t),n(s(14),t),n(s(26),t),n(s(27),t)},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Service=void 0;t.Service=class{constructor(e){this.scene=e}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.HEX_COLORS=t.COLORS=void 0,t.COLORS={white:16777215,green:65280,red:16711680,gray:14540253,yellow:16548895},t.HEX_COLORS={white:"#ffffff",green:"#00ff00"}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Enemy=void 0;const i=s(2),n=s(0);t.Enemy=class{constructor(e,t){this.isOutOfWorld=!1,this.angle=0,this.scene=e,this.name=t}act(e,t){}updateWorldCollisions(e,t){const{isOutOfWorld:s}=this;if(this.isOutsideScene(100)){if(!s){const e=250,t=150,s=n.CONFIG.width/2-e+Math.random()*(2*e),a=n.CONFIG.height/2-t+Math.random()*(2*t),o=new i.Vector(s,a);this.onOutOfWorld(o)}this.isOutOfWorld=!0}else this.isOutOfWorld=!1}damage(e){this.hp-=e,this.hp<=0&&this.destroy()}destroy(){const{scene:e,body:t,coinChance:s}=this;e.enemies=e.enemies.filter(e=>e!==this),t.destroy();const i=e.getStats();Math.random()>1-s&&e.utils.createBonus(t.x,t.y),i.kills[this.name]+=1,i.totalKills+=1,e.shakeScreen()}isOutsideScene(e=0){const{body:t}=this;return t.x<e||t.x>n.CONFIG.width-e||t.y<e||t.y>n.CONFIG.height-e}onOutOfWorld(e){}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.SphereBullet=t.Bullet=void 0;var i=s(18);Object.defineProperty(t,"Bullet",{enumerable:!0,get:function(){return i.Bullet}});var n=s(29);Object.defineProperty(t,"SphereBullet",{enumerable:!0,get:function(){return n.Sphere}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UIRainbowText=t.UICosmons=t.UIButton=void 0;var i=s(46);Object.defineProperty(t,"UIButton",{enumerable:!0,get:function(){return i.UIButton}});var n=s(47);Object.defineProperty(t,"UICosmons",{enumerable:!0,get:function(){return n.UICosmons}});var a=s(48);Object.defineProperty(t,"UIRainbowText",{enumerable:!0,get:function(){return a.UIRainbowText}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Scene=void 0;const i=s(0);class n extends Phaser.Scene{getData(){return this.game.data}setData(e,t){this.game.data[e]=t,i.isDev&&console.log(`[${e}] was updated in global data:`,this.game.data)}}t.Scene=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Flyer=t.UFO=t.Hunter=t.Bot=t.Enemy=void 0;var i=s(6);Object.defineProperty(t,"Enemy",{enumerable:!0,get:function(){return i.Enemy}});var n=s(24);Object.defineProperty(t,"Bot",{enumerable:!0,get:function(){return n.Bot}});var a=s(33);Object.defineProperty(t,"Hunter",{enumerable:!0,get:function(){return a.Hunter}});var o=s(34);Object.defineProperty(t,"UFO",{enumerable:!0,get:function(){return o.UFO}});var r=s(35);Object.defineProperty(t,"Flyer",{enumerable:!0,get:function(){return r.Flyer}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Effect=void 0;t.Effect=class{constructor(e){this.scene=e}act(){}destroy(){const{body:e}=this;this.scene.effects=this.scene.effects.filter(e=>e!==this),e.destroy()}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Level=void 0;const i=s(1),n=s(0),a=s(13);t.Level=class{constructor(e){this.nextAttemptTime=0,this.levelState=null,this.scene=e;const t=+this.constructor.name.slice(5)-1;this.mode=a.LEVELS_CONFIG[t].mode,this.mode.type===i.GameMode.waves&&this.setLevelState(0)}setLevelState(e){const{mode:t}=this;if(t.type===i.GameMode.waves){const s=t.target.length;this.levelState=e>=s?{waveNumber:e,enemies:[],maxEnemies:0}:{waveNumber:e,enemies:[...t.target[e].enemies],maxEnemies:t.target[e].maxEnemies}}}update(){const{scene:e,nextAttemptTime:t,nextAttemptTimeInterval:s}=this,i=e.gameTime;i>t&&(this.makeAttempt(),this.nextAttemptTime=i+s),this.updateStatus()}updateStatus(){const{scene:e,mode:t}=this,s=e.getStats(),n=t.type;switch(t.type){case i.GameMode.totalKills:{const e=+t.target;this.status=e-s.totalKills;break}case i.GameMode.enemyKills:{const e=t.target,i=Object.values(e).reduce((e,t)=>e+t,0),n=Object.keys(e).reduce((t,i)=>{const n=e[i];return t+Math.min(n,s.kills[i]||0)},0);this.status=i-n;break}case i.GameMode.time:this.status=Math.ceil(+t.target-e.gameTime/1e3);break;case i.GameMode.waves:{const e=t.target.length;this.status=e-this.levelState.waveNumber;break}default:throw new Error(`Mode "${n}" is not set or not defined!`)}this.status=Math.max(this.status,0)}getTextByMode(){return void 0===this.status?"":this.status.toString()}checkForWin(){const{status:e}=this;return void 0!==e&&e<=0}createEnemy(e){const{scene:t}=this,s={x:n.CONFIG.width,y:n.CONFIG.height},i=Math.random()>.5?"y":"x",a=[-50,s[i]+50][Math.floor(2*Math.random())],o={x:"x"===i?a:Math.random()*n.CONFIG.width,y:"y"===i?a:Math.random()*n.CONFIG.height};t.enemies.push(new e(t,o))}makeAttempt(){const{scene:e,mode:t,levelState:s}=this;if(t.type===i.GameMode.waves){const{maxEnemies:i,enemies:n}=s,a=t.target.length,o=e.enemies.length;if(o<i){const e=n.shift();e?this.createEnemy(e):o<=0&&s.waveNumber<a&&this.setLevelState(s.waveNumber+1)}}}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.LEVELS_CONFIG=void 0;const i=s(10),n=s(1),a=s(36);t.LEVELS_CONFIG=[a.getLevelConfig({level:0,title:"Red Alert",text:"Space invaders have attacked our base. Come back and find out the reason for the invasion.\n    \nWarning! A lot of invaders have been detected on our way.",mode:{type:n.GameMode.totalKills,target:30}}),a.getLevelConfig({level:1,title:"Hunters",text:"Hunters in sight. It's the most common units among the enemy ships. Be careful, they follow for their targets.",mode:{type:n.GameMode.enemyKills,target:{hunter:15}}}),a.getLevelConfig({level:2,title:"UFO",text:"Seems like aliens are also against us. Or maybe their ships were hijacked?",mode:{type:n.GameMode.time,target:150}}),a.getLevelConfig({level:3,title:"Defense",text:"Ok, we are on the base. Take the hit and help your allies to protect the one.",mode:{type:n.GameMode.waves,target:[{maxEnemies:4,enemies:[i.Bot,i.Bot,i.Bot,i.Hunter,i.Hunter,i.Bot,i.Hunter]},{maxEnemies:4,enemies:[i.Hunter,i.Hunter,i.Hunter,i.Bot,i.Bot,i.Bot,i.Bot,i.Bot,i.Hunter]},{maxEnemies:4,enemies:[i.Hunter,i.Hunter,i.Hunter,i.Bot,i.Hunter,i.Bot,i.Hunter,i.Bot,i.Hunter,i.Bot,i.Hunter,i.Bot,i.Bot,i.Bot]},{maxEnemies:5,enemies:[i.Bot,i.Bot,i.Bot,i.UFO,i.Hunter,i.UFO,i.Bot,i.UFO,i.Hunter,i.Bot,i.Hunter,i.Bot,i.Bot,i.UFO,i.Bot,i.Hunter,i.Bot]},{maxEnemies:5,enemies:[i.Hunter,i.Hunter,i.Hunter,i.UFO,i.UFO,i.Hunter,i.Hunter,i.Bot,i.Bot,i.Bot,i.Bot,i.Bot,i.Hunter,i.UFO,i.Hunter,i.Bot,i.UFO,i.Hunter,i.Bot,i.UFO,i.UFO,i.Hunter]}]}})]},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.spreadRadians=t.spreadAngle=t.getAngleDiff=t.getOffsetToAngle=t.getNearestAngle=t.angleToRadians=t.angleToDegrees=t.getAngleBetween=void 0;const i=s(2);function n(e){return e*Math.PI/180}t.getAngleBetween=function(e,t){const s=e.x-t.x,i=e.y-t.y;let n=Math.atan2(i,s);return n<0&&(n+=2*Math.PI),n},t.angleToDegrees=function(e){return e/Math.PI*180},t.angleToRadians=n,t.getNearestAngle=function(e,t,s){return Math.abs(e-t)<2?e:(Math.abs(e-t)<180?e<t?e+=s:e-=s:e<t?e-=s:e+=s,(e%360+360)%360)};t.getOffsetToAngle=(e,t)=>new i.Vector(Math.cos(e)*t,Math.sin(e)*t);t.getAngleDiff=(e,t)=>{const s=Math.abs(e-t);return Math.abs((s+180)%360-180)};t.spreadAngle=(e,t)=>e-t+Math.random()*(2*t);t.spreadRadians=(e,s)=>t.spreadAngle(e,n(s))},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Shadow=t.Fire=t.Explode=t.Effect=void 0;var i=s(11);Object.defineProperty(t,"Effect",{enumerable:!0,get:function(){return i.Effect}});var n=s(30);Object.defineProperty(t,"Explode",{enumerable:!0,get:function(){return n.Explode}});var a=s(31);Object.defineProperty(t,"Fire",{enumerable:!0,get:function(){return a.Fire}});var o=s(32);Object.defineProperty(t,"Shadow",{enumerable:!0,get:function(){return o.Shadow}})},,function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.INITIAL_GAME_DATA=t.GAME_CONFIG=void 0;const i=s(0),n=s(37),a=s(63),o=s(64),r=s(65),h=s(66),c=s(0);t.GAME_CONFIG={type:Phaser.AUTO,width:i.CONFIG.width,height:i.CONFIG.height,physics:{default:"arcade",arcade:{gravity:{y:0},debug:!1}},scene:[a.MenuScene,n.GameScene,h.PreviewScene,o.FailScene,r.WinScene]},t.INITIAL_GAME_DATA={level:c.isDev?2:0,levels:{},score:0}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Bullet=void 0;const i=s(0),n=s(1);t.Bullet=class{constructor(e,t,s,i){this.scene=e,this.pos=t,this.owner=s,this.damage=i}act(e,t){}update(e,t){const{body:s}=this;(s.x<0||s.x>i.CONFIG.width||s.y<0||s.y>i.CONFIG.height)&&this.destroy()}initCollisions(){const{scene:e,owner:t,damage:s}=this;t===n.Owner.player?e.enemies.forEach(t=>{e.physics.add.collider(this.body,t.body,()=>{this.explode(),t.damage(s)})}):e.physics.add.collider(this.body,e.player.body,()=>{this.explode(),e.player.damage(s)})}explode(){}destroy(){const{body:e}=this;this.scene.bullets=this.scene.bullets.filter(e=>e!==this),e.destroy()}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ENEMIES_CONFIG=void 0,t.ENEMIES_CONFIG={bot:{pluralName:["bot","bots","bots"]},hunter:{pluralName:["hunter","hunters","hunters"]},ufo:{pluralName:["ufo","ufo","ufo"]},flyer:{pluralName:["flyer","flyers","flyers"]}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UIComponent=void 0;t.UIComponent=class{constructor(e){this.scene=e}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Game=void 0,s(16);const i=s(17),n=s(0);class a extends Phaser.Game{constructor(e){super(e),this.data=i.INITIAL_GAME_DATA}}t.Game=a,window.addEventListener("load",()=>{const e=new a(i.GAME_CONFIG);n.isDev&&console.log("game",e)})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.CONFIG=void 0;const i=s(13);t.CONFIG={title:"Space Invaders",subtitle:"The battle for the galaxy",width:800,height:600,levelsCount:i.LEVELS_CONFIG.length,scene:{delta:16,minYPos:100,failTimeoutTime:2e3,winTimeoutTime:2e3,failTitleText:"MISSION FAILED",failSubtitleText:"Your ship was destroyed.",winTitleText:"MISSION COMPLETED"}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Vector=void 0;t.Vector=class{constructor(e,t){this.x=e,this.y=t}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Bot=void 0;const i=s(0),n=s(2),a=s(3),o=s(1),r=s(6),h=s(7);class c extends r.Enemy{constructor(e,t){super(e,o.EnemyName.bot),this.coinChance=.9,this.weaponDamage=10,this.bodySize=32,this.depth=50,this.scale=.6,this.speed=2,this.rotateSpeed=2,this.hp=30,this.bulletSpeed=7,this.lastShoot=0,this.shootTime=1200,this.shootTimeRange=200,this.changeTargetInterval=1e3,this.changeTargetIntervalRange=2e3,this.body=e.physics.add.image(t.x,t.y,"enemy-bot-ship"),this.init(),this.defineTarget=this.defineTarget.bind(this),this.defineTarget()}init(){const{scale:e,depth:t,body:s,bodySize:i}=this;s.setScale(e),s.setImmovable(!0),s.setDepth(t);const n=1.5+Math.random();this.speed=n,this.rotateSpeed=n;const o=a.getCenterBody(s.displayWidth,s.displayHeight,e,i);s.setCircle(i,o.x,o.y)}act(e,t){this.update(e,t)}update(e,t){const{scene:s}=this;if(this.updateWorldCollisions(e,t),this.updateBase(e,t),this.scene.gameTime>this.lastShoot){const e=s.player.body;this.shoot(new n.Vector(e.x,e.y))}}updateBase(e,t){const{body:s,angle:n,targetAngle:o,rotateSpeed:r}=this;this.body.angle=n-90;const h=a.angleToRadians(n),c=t/i.CONFIG.scene.delta;s.x+=this.speed*Math.cos(h)*c,s.y+=this.speed*Math.sin(h)*c,this.angle=a.getNearestAngle(n,o,r)}defineTarget(){const{changeTargetInterval:e,changeTargetIntervalRange:t}=this,s=new n.Vector(Math.random()*i.CONFIG.width,Math.random()*i.CONFIG.height);this.setTarget(s);const a=e+Math.random()*t;this.timeout=setTimeout(this.defineTarget,a)}setTarget(e){const{body:t}=this;this.targetPos=e,this.targetAngle=a.angleToDegrees(a.getAngleBetween(this.targetPos,t))}shoot(e){const{body:t,bulletSpeed:s,shootTimeRange:i,shootTime:r,weaponDamage:c}=this,l=a.getAngleBetween(e,new n.Vector(t.x,t.y));this.scene.bullets.push(new h.SphereBullet(this.scene,new n.Vector(t.x,t.y),o.Owner.enemy,{speed:a.getOffsetToAngle(l,s),angle:l,sprite:"laser-red",explodeSprite:"red-explode",damage:c})),this.lastShoot=this.scene.gameTime+r+Math.random()*i}onOutOfWorld(e){this.setTarget(e)}destroy(){const{scene:e,body:t}=this;e.utils.tripleExplode(t.x,t.y),clearTimeout(this.timeout),super.destroy()}}t.Bot=c},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.getCenterBody=void 0;const i=s(2);t.getCenterBody=(e,t,s,n,a={x:0,y:0})=>{const o=e/s/2-n+a.x,r=t/s/2-n+a.y;return new i.Vector(o,r)}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.getRandomInt=void 0;t.getRandomInt=(e,t)=>Math.round(e+Math.random()*(t-e))},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.pluralize=void 0,t.pluralize=function(e,t){switch(function(e){return e%10==1&&e%100!=11?0:e%10>=2&&e%10<=4&&(e%100<10||e%100>=20)?1:2}(e)){case 0:return t[0];case 1:return t[1];default:return t[2]}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.SceneName=t.EnemyName=t.GameMode=t.Owner=void 0,function(e){e.player="player",e.enemy="enemy"}(t.Owner||(t.Owner={})),function(e){e.totalKills="totalKills",e.enemyKills="enemyKill",e.time="time",e.waves="waves"}(t.GameMode||(t.GameMode={})),function(e){e.bot="bot",e.ufo="ufo",e.hunter="hunter",e.flyer="flyer"}(t.EnemyName||(t.EnemyName={})),function(e){e.menu="MenuScene",e.preview="PreviewScene",e.game="GameScene",e.fail="FailScene",e.win="WinScene"}(t.SceneName||(t.SceneName={}))},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Sphere=void 0;const i=s(2),n=s(0),a=s(3),o=s(15),r=s(18),h={scale:1,bodySize:6};class c extends r.Bullet{constructor(e,t,s,i){super(e,t,s,i.damage),this.depth=10,this.body=e.physics.add.image(t.x,t.y,i.sprite),this.params=Object.assign(Object.assign({},h),i),this.init()}init(){const{body:e,scene:t,params:s,depth:i}=this,{angle:n,scale:o}=s;e.setAngle(a.angleToDegrees(n)+90),e.setDepth(i),e.setOrigin(.5,.5),e.setScale(o),this.initBody(),this.initCollisions(),t.add.existing(this.body)}initBody(){const{params:e}=this,{angle:t,scale:s,bodySize:i}=e,n=a.getOffsetToAngle(t,this.body.displayHeight/s/3),o=a.getCenterBody(this.body.displayWidth,this.body.displayHeight,s,i,n);this.body.setCircle(i,o.x,o.y)}act(e,t){this.update(e,t)}draw(){}explode(){const{body:e,scene:t,params:s}=this;t.effects.push(new o.Explode(t,new i.Vector(e.x,e.y),{sprite:s.explodeSprite})),this.destroy()}update(e,t){const{body:s}=this,{speed:i}=this.params;s.x+=i.x*(t/n.CONFIG.scene.delta),s.y+=i.y*(t/n.CONFIG.scene.delta),super.update(e,t)}}t.Sphere=c},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Explode=void 0;const i=s(11);class n extends i.Effect{constructor(e,t,s){super(e),this.body=new Phaser.GameObjects.Sprite(e,t.x,t.y,s.sprite),this.params=s,this.startTime=e.gameTime,this.body.setScale(0),this.body.setDepth(115),e.add.existing(this.body)}act(){this.update()}update(){const{scene:e,startTime:t}=this,s=e.gameTime-t,i=Math.sin(s/150),n=i;this.body.angle+=3,this.body.setScale(n,n),this.body.setAlpha(i),i<.06&&s>100&&this.destroy()}}t.Explode=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Fire=void 0;const i=s(14),n=s(11);class a extends n.Effect{constructor(e,t,s){super(e),this.speed=1.7,this.body=new Phaser.GameObjects.Sprite(e,t.x,t.y,"fire"),this.params=s,this.body.setDepth(5),this.body.setAngle(i.angleToDegrees(s.angle)+90),this.startTime=e.gameTime,this.params=s,e.add.existing(this.body)}act(){this.update()}update(){const{scene:e,body:t,speed:s,startTime:i,params:n}=this,a=e.gameTime-i;t.alpha=1-a/150,t.x+=s*Math.cos(n.angle),t.y+=s*Math.sin(n.angle),t.alpha<=0&&this.destroy()}}t.Fire=a},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Shadow=void 0;const i=s(11);class n extends i.Effect{constructor(e,t,s){super(e),this.params=s,this.body=new Phaser.GameObjects.Sprite(e,t.x,t.y,s.sprite),this.body.setScale(s.scale),this.body.setAngle(s.angle),this.body.setAlpha(s.alpha),this.body.setDepth(0),this.destroyTime=s.lifeTime+e.gameTime,e.add.existing(this.body)}act(){this.update()}update(){const{scene:e,body:t,destroyTime:s,params:i}=this,{gameTime:n}=e,a=(s-n)*i.alpha/i.lifeTime;t.setAlpha(a),n>this.destroyTime&&this.destroy()}}t.Shadow=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Hunter=void 0;const i=s(0),n=s(2),a=s(3),o=s(1),r=s(6),h=s(7);var c;!function(e){e.moving="moving",e.stop="stop",e.rotate="rotate",e.attack="attack"}(c||(c={}));class l extends r.Enemy{constructor(e,t){super(e,o.EnemyName.hunter),this.weaponDamage=10,this.chanceToShoot=.25,this.lastShootTime=0,this.shootIntervalTime=1200,this.attackEndTime=0,this.attackIntervalTime=3e3,this.attackShootIntervalTime=325,this.attackSpreadRange=15,this.attackHunting=!0,this.lastChangeTargetTime=0,this.changeTargetInterval=1e3,this.changeTargetIntervalRange=2e3,this.rotateSpeed=2,this.currentRotateSpeed=this.rotateSpeed,this.rotateTimer=0,this.rotateIntervalTimer=3e3,this.maxSpeed=2,this.speed=2,this.speedIncrease=.05,this.stopEndTime=0,this.stopIntervalTime=3e3,this.stopIntervalRangeTime=1e3,this.coinChance=.9,this.bodySize=36,this.depth=50,this.scale=.7,this.hp=70,this.bulletSpeed=7,this.behavior=c.moving,this.body=e.physics.add.image(t.x,t.y,"enemy-hunter-ship"),this.init(),this.defineTarget=this.defineTarget.bind(this),this.defineTarget()}init(){const{scale:e,depth:t,body:s,bodySize:i}=this;s.setScale(e),s.setImmovable(!0),s.setDepth(t);const n=a.getCenterBody(s.displayWidth,s.displayHeight,e,i);s.setCircle(i,n.x,n.y),this.setStopEndTime(!0)}act(e,t){this.update(e,t)}update(e,t){const{scene:s,body:i,lastShootTime:o,shootIntervalTime:r,chanceToShoot:h,behavior:l,speedIncrease:d,stopEndTime:u,attackHunting:p,attackIntervalTime:m}=this,g=s.player.body,y=s.gameTime;switch(this.updateBase(y,t),l){case c.moving:this.speed<this.maxSpeed&&(this.speed+=d),y>o&&(Math.random()>1-h&&this.shoot(a.getAngleBetween(new n.Vector(g.x,g.y),new n.Vector(i.x,i.y))),this.lastShootTime=y+r),y>this.lastChangeTargetTime&&this.updateTarget(),y>u&&(this.behavior=c.stop);break;case c.stop:this.speed>0?this.speed-=d:this.setRotateBehavior();break;case c.rotate:this.setTarget(new n.Vector(g.x,g.y)),y>o&&(this.shoot(a.angleToRadians(this.angle),this.attackSpreadRange),this.lastShootTime=y+this.attackShootIntervalTime),a.getAngleDiff(this.targetAngle,this.angle)<=4?this.setAttackBehavior():y>this.rotateTimer&&this.setMovingBehavior();break;case c.attack:(p||y>this.attackEndTime-m/3)&&this.setTarget(new n.Vector(g.x,g.y)),this.speed<this.maxSpeed&&(this.speed+=d),y>o&&(this.shoot(a.angleToRadians(this.angle),this.attackSpreadRange),this.lastShootTime=y+this.attackShootIntervalTime),p&&y>this.attackEndTime-m/1.5&&(this.attackHunting=!1,this.updateTarget()),y>this.attackEndTime&&this.setMovingBehavior()}}updateBase(e,t){const{body:s,angle:o,targetAngle:r,currentRotateSpeed:h}=this;this.body.angle=o-90;const c=a.angleToRadians(o),l=t/i.CONFIG.scene.delta;s.x+=this.speed*Math.cos(c)*l,s.y+=this.speed*Math.sin(c)*l,this.angle=a.getNearestAngle(o,r,h),(s.x<100||s.y<100||s.x>i.CONFIG.width-100||s.y>i.CONFIG.height-100)&&this.setTarget(new n.Vector(i.CONFIG.width/2,i.CONFIG.height/2))}updateTarget(){const{scene:e,changeTargetInterval:t,changeTargetIntervalRange:s}=this,i=e.gameTime;this.defineTarget();const n=t+Math.random()*s;this.lastChangeTargetTime=i+n}defineTarget(){const e=new n.Vector(Math.random()*i.CONFIG.width,Math.random()*i.CONFIG.height);this.setTarget(e)}setTarget(e){const{body:t}=this;this.setTargetAngle(a.angleToDegrees(a.getAngleBetween(e,t)))}setTargetAngle(e){this.targetAngle=e}setAttackBehavior(){const{scene:e,rotateSpeed:t}=this,s=e.gameTime;this.attackEndTime=s+this.attackIntervalTime,this.currentRotateSpeed=t,this.attackHunting=!0,this.behavior=c.attack}setStopEndTime(e=!1){const{scene:t,stopIntervalTime:s,stopIntervalRangeTime:i}=this,n=t.gameTime;this.stopEndTime=e?n+1e3+a.getRandomInt(0,s):n+s+a.getRandomInt(0,i)}setMovingBehavior(){const{scene:e,changeTargetInterval:t,shootIntervalTime:s}=this,i=e.gameTime;this.setStopEndTime(),this.lastChangeTargetTime=i+t,this.lastShootTime=i+s,this.behavior=c.moving}setRotateBehavior(){const{scene:e,rotateIntervalTimer:t,rotateSpeed:s}=this,i=e.gameTime;this.speed=0,this.rotateTimer=i+t,this.currentRotateSpeed=s+1,this.behavior=c.rotate}shoot(e,t=0){const{body:s,bulletSpeed:i,weaponDamage:r}=this,c=a.spreadRadians(e,t);this.scene.bullets.push(new h.SphereBullet(this.scene,new n.Vector(s.x,s.y),o.Owner.enemy,{speed:a.getOffsetToAngle(c,i),angle:c,sprite:"laser-red",explodeSprite:"red-explode",damage:r}))}destroy(){const{scene:e,body:t}=this;e.utils.tripleExplode(t.x,t.y),super.destroy()}}t.Hunter=l},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UFO=void 0;const i=s(0),n=s(2),a=s(3),o=s(1),r=s(6),h=s(7);var c;!function(e){e.moving="moving",e.stop="stop",e.attack="attack"}(c||(c={}));class l extends r.Enemy{constructor(e,t){super(e,o.EnemyName.ufo),this.weaponDamage=10,this.chanceToShoot=.25,this.lastShootTime=0,this.shootIntervalTime=1200,this.attackEndTime=0,this.attackIntervalTime=1e3,this.lastChangeTargetTime=0,this.changeTargetInterval=1e3,this.changeTargetIntervalRange=2e3,this.rotateSpeed=.5,this.maxSpeed=1,this.speed=1,this.speedIncrease=.02,this.stopEndTime=0,this.stopIntervalTime=1500,this.stopIntervalRangeTime=2500,this.coinChance=.9,this.bodySize=36,this.depth=50,this.scale=.7,this.hp=70,this.bulletSpeed=7,this.behavior=c.moving,this.body=e.physics.add.image(t.x,t.y,"enemy-ufo"),this.init(),this.defineTarget=this.defineTarget.bind(this),this.defineTarget()}init(){const{scale:e,depth:t,body:s,bodySize:i}=this;s.setScale(e),s.setImmovable(!0),s.setDepth(t);const n=a.getCenterBody(s.displayWidth,s.displayHeight,e,i);s.setCircle(i,n.x,n.y),this.setStopEndTime(!0)}act(e,t){this.update(e,t)}update(e,t){const{scene:s,body:i,lastShootTime:o,shootIntervalTime:r,chanceToShoot:h,behavior:l,speedIncrease:d,changeTargetInterval:u,changeTargetIntervalRange:p,stopEndTime:m}=this,g=s.player.body,y=s.gameTime;switch(this.updateBase(y,t),l){case c.moving:if(this.speed<this.maxSpeed&&(this.speed+=d),y>o&&(Math.random()>1-h&&this.shoot(a.getAngleBetween(new n.Vector(g.x,g.y),new n.Vector(i.x,i.y)),!1),this.lastShootTime=y+r),y>this.lastChangeTargetTime){this.defineTarget();const e=u+Math.random()*p;this.lastChangeTargetTime=y+e}y>m&&!this.isOutsideScene()&&(this.behavior=c.stop);break;case c.stop:this.speed>0?this.speed-=d:(this.attackEndTime=y+this.attackIntervalTime,this.behavior=c.attack);break;case c.attack:y>this.attackEndTime&&(this.circleAttack(),this.setMovingBehavior())}}updateBase(e,t){const{body:s,angle:o,targetAngle:r,rotateSpeed:h}=this;this.body.angle+=this.speed;const c=a.angleToRadians(o),l=t/i.CONFIG.scene.delta;s.x+=this.speed*Math.cos(c)*l,s.y+=this.speed*Math.sin(c)*l,this.angle=a.getNearestAngle(o,r,h),(s.x<100||s.y<100||s.x>i.CONFIG.width-100||s.y>i.CONFIG.height-100)&&this.setTarget(new n.Vector(i.CONFIG.width/2,i.CONFIG.height/2))}defineTarget(){const e=new n.Vector(Math.random()*i.CONFIG.width,Math.random()*i.CONFIG.height);this.setTarget(e)}setTarget(e){const{body:t}=this;this.targetPos=e,this.targetAngle=a.angleToDegrees(a.getAngleBetween(this.targetPos,t))}setStopEndTime(e=!1){const{scene:t,stopIntervalTime:s,stopIntervalRangeTime:i}=this,n=t.gameTime;this.stopEndTime=n+s+a.getRandomInt(0,i)}setMovingBehavior(){const{scene:e,changeTargetInterval:t,shootIntervalTime:s}=this,i=e.gameTime;this.setStopEndTime(),this.lastChangeTargetTime=i+t,this.lastShootTime=i+s,this.behavior=c.moving}circleAttack(){const e=45*Math.random();for(let t=0;t<8;t++)this.shoot(a.angleToRadians(e+45*t),!0)}shoot(e,t=!0){const{body:s,bulletSpeed:i,weaponDamage:r}=this;this.scene.bullets.push(new h.SphereBullet(this.scene,new n.Vector(s.x,s.y),o.Owner.enemy,{speed:a.getOffsetToAngle(e,i),angle:e,sprite:t?"sphere-bullet":"laser-red",explodeSprite:"red-explode",damage:r,scale:t?.35:1,bodySize:t?32:12}))}destroy(){const{scene:e,body:t}=this;e.utils.tripleExplode(t.x,t.y),this.circleAttack(),super.destroy()}}t.UFO=l},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Flyer=void 0;const i=s(0),n=s(2),a=s(3),o=s(15),r=s(1),h=s(6),c=s(7);class l extends h.Enemy{constructor(e,t){super(e,r.EnemyName.flyer),this.maxSpeed=4,this.minSpeed=1,this.speed=2,this.speedChange=.1,this.rotateSpeed=2,this.bulletSpeed=7,this.lastShootTime=0,this.shootTime=1200,this.shootTimeInterval=200,this.weaponDamage=10,this.lastShadowTime=0,this.shadowTime=50,this.hp=50,this.coinChance=.9,this.bodySize=32,this.depth=50,this.scale=.6,this.body=e.physics.add.image(t.x,t.y,"enemy-flyer"),this.init(),this.defineRandomTargetPoint=this.defineRandomTargetPoint.bind(this),this.defineRandomTargetPoint()}init(){const{scale:e,depth:t,body:s,bodySize:i}=this;s.setScale(e),s.setImmovable(!0),s.setDepth(t);const n=a.getCenterBody(s.displayWidth,s.displayHeight,e,i);s.setCircle(i,n.x,n.y)}act(e,t){this.update(e,t)}update(e,t){this.updateWorldCollisions(e,t),this.updateBase(e,t),this.updateMovement(e,t),this.updateAttack(e,t),this.updateShadows()}updateBase(e,t){const{body:s,angle:n,targetAngle:o,rotateSpeed:r}=this;this.body.angle=n-90;const h=a.angleToRadians(n),c=t/i.CONFIG.scene.delta;s.x+=this.speed*Math.cos(h)*c,s.y+=this.speed*Math.sin(h)*c,this.angle=a.getNearestAngle(n,o,r)}updateMovement(e,t){const{speedChange:s,angle:i,targetAngle:n}=this;a.getAngleDiff(i,n)<3?this.speed<this.maxSpeed&&(this.speed+=s):this.speed>this.minSpeed&&(this.speed-=s)}updateAttack(e,t){const{scene:s,body:i,shootTime:o,shootTimeInterval:r}=this,h=s.gameTime;if(h>this.lastShootTime){const e=s.player.body,t=new n.Vector(e.x,e.y),c=a.getAngleBetween(t,new n.Vector(i.x,i.y));if(Math.random()>.1){const e=.25+.3*Math.random();this.shoot(c+e),this.shoot(c-e)}else this.shoot(c);this.lastShootTime=h+o+Math.random()*r}}updateShadows(){const{scene:e,lastShadowTime:t,shadowTime:s}=this,i=e.gameTime;i>t&&(this.lastShadowTime=i+s,this.createShadow())}createShadow(){const{scene:e,body:t,scale:s,angle:i}=this,a=.25*Math.max(this.maxSpeed-this.speed,0);e.effects.push(new o.Shadow(e,new n.Vector(t.x,t.y),{sprite:"enemy-flyer",lifeTime:250,scale:s,angle:i-90,alpha:.4-a}))}defineRandomTargetPoint(){const e=new n.Vector(Math.random()*i.CONFIG.width,Math.random()*i.CONFIG.height);this.setTarget(e)}setTarget(e){this.targetAngle=a.angleToDegrees(a.getAngleBetween(e,this.body))}shoot(e){const{body:t,bulletSpeed:s,weaponDamage:i}=this;this.scene.bullets.push(new c.SphereBullet(this.scene,new n.Vector(t.x,t.y),r.Owner.enemy,{speed:a.getOffsetToAngle(e,s),angle:e,sprite:"laser-red",explodeSprite:"red-explode",damage:i}))}onOutOfWorld(e){this.setTarget(e)}destroy(){const{scene:e,body:t}=this;e.utils.tripleExplode(t.x,t.y),super.destroy()}}t.Flyer=l},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.getLevelConfig=void 0;const i=s(19),n=s(1),a=s(3),o=e=>{switch(e.type){case n.GameMode.totalKills:{const t=e.target;return`Mission: kill ${t} ${a.pluralize(t,["invader","invaders","invaders"])}`}case n.GameMode.enemyKills:{const t=e.target;return"Mission: kill "+Object.keys(t).map(e=>{const s=t[e];return`${s} ${a.pluralize(s,i.ENEMIES_CONFIG[e].pluralName)}`}).join(" / ")}case n.GameMode.time:{const t=e.target;return`Mission: stay alive for ${t} ${a.pluralize(t,["second","seconds","seconds"])}`}case n.GameMode.waves:return`Mission: Defeat ${e.target.length} waves of enemies`}};t.getLevelConfig=e=>Object.assign(Object.assign({},e),{mission:o(e.mode)})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.GameScene=void 0;var i=s(38);Object.defineProperty(t,"GameScene",{enumerable:!0,get:function(){return i.GameScene}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.GameScene=void 0;const i=s(0),n=s(39),a=s(9),o=s(57),r=s(1),h=s(58),c=s(59),l=s(62);let d;class u extends a.Scene{constructor(){super({key:r.SceneName.game}),this.enemies=[],this.bullets=[],this.effects=[],this.bonuses=[],this.score=0,this.services=[],this.stats=l.getInitialGameData(),this.isWon=!1,this.isFail=!1,this.gameTime=0}preload(){}init(e){this.params=e}create(){this.resetState(),this.physics.world.setBounds(0,0,i.CONFIG.width,i.CONFIG.height),this.background=this.add.image(0,0,"background").setOrigin(0,0).setAlpha(.2),d=this.add.graphics({lineStyle:{width:2,color:65280},fillStyle:{color:16711680}}),this.player=new o.Player(this),this.utils=new c.Utils(this),this.initListeners(),this.initServices(),this.initTimer(),this.shakeCamera=this.cameras.add(0,0,i.CONFIG.width,i.CONFIG.height)}initTimer(){this.time.addEvent({delay:10,callback:this.onClockEvent,callbackScope:this,loop:!0})}onClockEvent(){this.gameTime+=15}initListeners(){this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M).on("down",()=>{this.player.body.active&&this.scene.start(r.SceneName.menu)})}initServices(){this.addService(n.StarsService,{count:20}),this.addService(n.MeteorsService,{}),this.addService(n.InterfaceService,{}),this.addService(n.LevelService,{}),this.addService(n.CometsService,{})}addService(e,t){this.services.push(new e(this,t))}update(e,t){d.clear(),this.enemies.forEach(s=>{s.act(e,t)}),this.bullets.forEach(s=>{s.act(e,t)}),this.effects.forEach(e=>{e.act()}),this.services.forEach(s=>{s.act(e,t)}),this.bonuses.forEach(e=>{e.act()}),this.player.act(e,t)}resetState(){this.bullets=[],this.enemies=[],this.effects=[],this.bonuses=[],this.score=0,this.text="",this.services=[],this.stats=l.getInitialGameData(),this.isWon=!1,this.isFail=!1,this.gameTime=0}onFail(){this.isFail=!0,setTimeout(()=>{this.scene.start(r.SceneName.fail)},i.CONFIG.scene.failTimeoutTime)}onWin(){this.isWon||this.isFail||(this.isWon=!0,setTimeout(()=>{this.isFail||this.scene.start(r.SceneName.win,{score:this.score,isFlawlessVictory:this.player.hp===this.player.maxHp})},i.CONFIG.scene.winTimeoutTime))}shakeScreen(){this.shakeCamera.shake(500,.003)}getStats(){return this.stats}}t.GameScene=u,u.prototype.preload=h.preload},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Service=t.CometsService=t.LevelService=t.InterfaceService=t.LoggerService=t.MeteorsService=t.StarsService=void 0;var i=s(40);Object.defineProperty(t,"StarsService",{enumerable:!0,get:function(){return i.StarsService}});var n=s(42);Object.defineProperty(t,"MeteorsService",{enumerable:!0,get:function(){return n.MeteorsService}});var a=s(44);Object.defineProperty(t,"LoggerService",{enumerable:!0,get:function(){return a.LoggerService}});var o=s(45);Object.defineProperty(t,"InterfaceService",{enumerable:!0,get:function(){return o.InterfaceService}});var r=s(49);Object.defineProperty(t,"LevelService",{enumerable:!0,get:function(){return r.LevelService}});var h=s(55);Object.defineProperty(t,"CometsService",{enumerable:!0,get:function(){return h.CometsService}});var c=s(4);Object.defineProperty(t,"Service",{enumerable:!0,get:function(){return c.Service}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.StarsService=void 0;const i=s(41),n=s(4);class a extends n.Service{constructor(e,t){super(e),this.stars=[],this.params=t,this.init()}init(){const{scene:e}=this,{count:t}=this.params;for(let s=0;s<t;s++)this.stars.push(new i.Star(e,{initialAlphaCoef:500*s}))}act(e,t){this.update(e,t)}update(e,t){this.stars.forEach(s=>{s.act(e,t)})}}t.StarsService=a},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Star=void 0;const i=s(0);t.Star=class{constructor(e,t){this.scene=e,this.body=e.add.sprite(Math.random()*i.CONFIG.width,Math.random()*i.CONFIG.height,"star"),this.initialCoef=t.initialAlphaCoef,this.body.setDepth(0),this.body.setScale(.25+.25*Math.random())}act(e,t){this.update(e,t)}update(e,t){const{scene:s,body:n,initialCoef:a,lastRelocationTime:o}=this,r=s.gameTime;n.angle+=4,n.alpha=Math.sin((r+a)/1500),r>o&&n.alpha<=.5&&(n.x=Math.random()*i.CONFIG.width,n.y=Math.random()*i.CONFIG.height,this.lastRelocationTime=r+1e3)}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.MeteorsService=void 0;const i=s(0),n=s(2),a=s(43),o=s(14),r=s(3),h=s(4);class c extends h.Service{constructor(e,t){super(e),this.meteors=[],this.meteorIntervalTime=1e3,this.meteorIntervalTimeRange=1e3,this.lastMeteorTime=0,this.maxCount=25,this.params=t,this.init()}init(){for(let e=0;e<r.getRandomInt(5,8);e++)this.spawnMeteor({outside:!1});for(let e=0;e<r.getRandomInt(3,5);e++)this.spawnMeteor({outside:!0})}act(e,t){this.update(e,t)}update(e,t){const{scene:s,maxCount:n}=this,a=t/i.CONFIG.scene.delta;s.gameTime>this.lastMeteorTime&&this.meteors.length<n&&this.spawnMeteor({outside:!0}),this.meteors.forEach(e=>{const{body:t,speed:s}=e;t.angle+=.5*s.x*a,t.x+=s.x*a,t.y+=s.y*a,(t.x>i.CONFIG.width+200||t.y>i.CONFIG.height+200)&&(this.meteors=this.meteors.filter(t=>t!==e),t.destroy())})}spawnMeteor({outside:e}){const{scene:t}=this,s=t.gameTime,{meteorIntervalTime:r,meteorIntervalTimeRange:h}=this,c=.5+1*Math.random(),l=o.angleToRadians(45),d=.25+2.5*Math.random(),u=new n.Vector(d*Math.cos(l),d*Math.sin(l)),p=Math.random()>.5?"x":"y",m=e?{x:"x"===p?Math.random()*(.75*i.CONFIG.width)-200:-200,y:"y"===p?Math.random()*(.75*i.CONFIG.height)-200:-200}:{x:i.CONFIG.width*Math.random(),y:i.CONFIG.height*Math.random()};this.meteors.push(new a.Meteor(t,m,u,{spriteIndex:1+Math.floor(4*Math.random()),alpha:.25+.4*Math.random(),scale:c})),this.lastMeteorTime=Math.random()*h+s+r*c}}t.MeteorsService=c},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Meteor=void 0;t.Meteor=class{constructor(e,t,s,i){this.scene=e,this.body=e.add.sprite(t.x,t.y,"meteor-"+i.spriteIndex),this.speed=s,this.body.setAlpha(i.alpha),this.body.setDepth(5),this.body.setScale(i.scale,i.scale)}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.LoggerService=void 0;const i=s(4);class n extends i.Service{constructor(e,t){super(e),this.lastLogTime=0,this.params=t,this.init()}init(){}act(){this.update()}update(){const e=this.scene,t=e.gameTime;t>this.lastLogTime&&(console.group("Stats"),console.log("effects: "+e.effects.length),console.log("enemies: "+e.enemies.length),console.log("bullets: "+e.bullets.length),console.groupEnd(),this.lastLogTime=t+2e3)}}t.LoggerService=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.InterfaceService=void 0;const i=s(0),n=s(2),a=s(5),o=s(8),r=s(4);class h extends r.Service{constructor(e,t){super(e),this.backgroundInitialAlpha=0,this.backgroundChangeTime=15e3,this.params=t,this.init()}init(){const{scene:e}=this;this.graphics=e.add.graphics({lineStyle:{width:2,color:65280},fillStyle:{color:16711680}}),this.counterText=e.add.bitmapText(i.CONFIG.width-17,27,"atari","0",24).setOrigin(1,.5).setDepth(500),this.scoreText=new o.UICosmons(e,{pos:new n.Vector(243,27),value:0,isCentered:!1,depth:100}),this.playerHealthbar=new Phaser.Geom.Rectangle(20,24,i.CONFIG.width,11),this.graphics.setDepth(500),this.backgroundInitialAlpha=Math.random()*(5*this.backgroundChangeTime)}act(){this.draw(),this.update()}draw(){this.drawHealthbar(),this.drawScore()}update(){const{scene:e,backgroundInitialAlpha:t,backgroundChangeTime:s}=this,i=.25*(1+Math.sin((t+e.gameTime)/s));e.background.setAlpha(i)}drawHealthbar(){const{graphics:e,scene:t,playerHealthbar:s}=this,{player:i}=t;e.clear(),e.fillStyle(a.COLORS.red),s.width=200,e.fillRectShape(s),e.fillStyle(a.COLORS.green),s.width=Math.max(i.hp/i.maxHp*200,0),e.fillRectShape(s),e.lineStyle(2,a.COLORS.white),s.width=200,e.strokeRectShape(s)}drawScore(){const{scene:e,counterText:t,scoreText:s}=this;t.setText(e.text),s.updateValue(e.score)}}t.InterfaceService=h},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UIButton=void 0;const i=s(5);class n extends Phaser.GameObjects.Image{constructor(e,t,s,n,a){super(e,t,s,n),this.graphics=e.add.graphics({lineStyle:{width:2,color:i.COLORS.white},fillStyle:{color:i.COLORS.white}}),this.params=a,this.init()}init(){const{scene:e,graphics:t,x:s,y:n}=this,{width:a,height:o,text:r,disabled:h}=this.params;this.width=a,this.height=o,this.setOrigin(.5,0);const c=h?.5:1;h?t.alpha=c:this.setInteractive({cursor:"pointer"});const l=new Phaser.Geom.Rectangle(s-a/2,n,a,o);t.strokeRectShape(l);const d=e.add.bitmapText(s,n+Math.floor(o/2),"atari","",16).setOrigin(.5).setAlpha(c).setCenterAlign();d.setText(r),this.on("pointerover",()=>{t.alpha=c,t.lineStyle(2,i.COLORS.green),d.tint=i.COLORS.green,document.body.style.cursor="pointer",t.strokeRectShape(l)}),this.on("pointerout",()=>{t.alpha=c,t.lineStyle(2,i.COLORS.white),d.tint=i.COLORS.white,document.body.style.cursor="default",t.strokeRectShape(l)}),this.on("pointerdown",()=>{document.body.style.cursor="default"})}}t.UIButton=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UICosmons=void 0;const i=s(20);class n extends i.UIComponent{constructor(e,t){super(e),this.params=t,this.init()}init(){const{scene:e,params:t}=this,{pos:s,value:i,isCentered:n,depth:a,prefix:o}=t,r=o?12:0,h=e.add.image(s.x,s.y,"coin-gold").setOrigin(0,.5).setDepth(a),c=new Phaser.GameObjects.BitmapText(e,s.x+h.width+12-4,s.y+4+1,"atari",o,22).setOrigin(0,.5).setDepth(a);if(o&&e.add.existing(c),this.valueText=e.add.bitmapText(s.x+h.width+12+r,s.y+4,"atari",i.toString(),22).setOrigin(0,.5).setDepth(a),n){const e=(h.width+12+this.valueText.width+r)/2;h.x-=e,this.valueText.x-=e,c.x-=e}}updateValue(e){this.valueText.setText(e.toString())}}t.UICosmons=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UIRainbowText=void 0;const i=s(5),n=s(20),a={fontSize:23,color:i.COLORS.green};class o extends n.UIComponent{constructor(e,t){super(e),this.rainbowColorIdx=0,this.rainbowColorOffset=0,this.delay=0,this.rainbowWave=0,this.params=Object.assign(Object.assign({},a),t),this.init()}init(){const{scene:e}=this,{text:t,pos:s,color:i}=this.params;this.rainbowCallback=this.rainbowCallback.bind(this);const n=e.add.dynamicBitmapText(s.x,s.y,"atari",t,23).setOrigin(.5).setCenterAlign();n.setDisplayCallback(this.rainbowCallback),n.tint=i}update(){this.updateRainbow()}updateRainbow(){this.rainbowColorIdx=0,6==this.delay++&&(this.rainbowColorOffset=(this.rainbowColorOffset+1)%4,this.delay=0)}rainbowCallback(e){const{color:t}=this.params;return e.color=t,this.rainbowColorIdx=(this.rainbowColorIdx+1)%4,e.y=2*Math.cos(this.rainbowWave+this.rainbowColorIdx),this.rainbowWave+=.005,e}}t.UIRainbowText=o},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.LevelService=void 0;const i=s(50),n=s(4);class a extends n.Service{constructor(e,t){super(e),this.params=t,this.init()}init(){const{scene:e}=this,t=e.params.level;this.currentLevel=new i.levels[t](e)}act(){this.update()}update(){const{scene:e,currentLevel:t}=this,s=t.checkForWin();e.text=t.getTextByMode(),t.update(),s&&e.onWin()}}t.LevelService=a},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.levels=void 0;const i=s(51),n=s(52),a=s(53),o=s(54);t.levels=[i.Level1,n.Level2,a.Level3,o.Level4]},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Level1=void 0;const i=s(10),n=s(12);class a extends n.Level{constructor(e){super(e),this.nextAttemptTimeInterval=1500}makeAttempt(){const{scene:e}=this,{enemies:t}=e,s=e.getStats(),n=this.mode,a=s.totalKills>Math.ceil(.66*n.target)?5:4;(t.length<3||t.length<a&&Math.random()>.8)&&this.createEnemy(i.Bot)}}t.Level1=a},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Level2=void 0;const i=s(10),n=s(1),a=s(12);class o extends a.Level{constructor(e){super(e),this.nextAttemptTimeInterval=1500}makeAttempt(){const{scene:e}=this,{enemies:t}=e,s=e.getStats(),i=this.mode,n=s.kills.hunter>Math.ceil(i.target.hunter/2)?.4:0;(t.length<3||t.length<4&&Math.random()>.75-n)&&this.spawnEnemy()}spawnEnemy(){const{scene:e}=this,t=e.getStats(),s=e.enemies.filter(e=>e.name===n.EnemyName.hunter).length,a=Math.floor(t.kills.bot/3)>t.kills.hunter+s;Math.random()>.3&&!a||s>=2?this.createEnemy(i.Bot):this.createEnemy(i.Hunter)}}t.Level2=o},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Level3=void 0;const i=s(10),n=s(1),a=s(12);class o extends a.Level{constructor(e){super(e),this.nextAttemptTimeInterval=1500,this.additionalTime=0,this.additionalTimeInterval=1e4,this.additionalTime=e.gameTime+this.additionalTimeInterval}update(){const{scene:e,additionalTime:t,additionalTimeInterval:s}=this;e.gameTime>t&&(this.spawnEnemy(!0),this.additionalTime=e.gameTime+s),super.update()}makeAttempt(){const{scene:e}=this,{enemies:t}=e;t.length<4&&this.spawnEnemy()}spawnEnemy(e=!1){const{scene:t}=this,s=Math.random(),a=t.enemies.filter(e=>e.name===n.EnemyName.hunter).length+t.enemies.filter(e=>e.name===n.EnemyName.ufo).length;s>.7&&(a<2||e)?this.createEnemy(i.UFO):s>.3&&(a<2||e)?this.createEnemy(i.Hunter):this.createEnemy(i.Bot)}}t.Level3=o},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Level4=void 0;const i=s(12);class n extends i.Level{constructor(e){super(e),this.nextAttemptTimeInterval=1500}update(){super.update()}}t.Level4=n},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.CometsService=void 0;const i=s(0),n=s(56),a=s(4);class o extends a.Service{constructor(e,t){super(e),this.comets=[],this.count=15,this.params=t,this.init()}init(){const{scene:e,count:t}=this;for(let s=0;s<t;s++)this.comets.push(new n.Comet(e,{}))}act(e,t){this.update(e,t)}update(e,t){const s=t/i.CONFIG.scene.delta;this.comets.forEach(e=>{const{body:t}=e;t.y+=e.speed*s,t.y>i.CONFIG.height+100&&(e.updateParams(),e.refreshPosition())})}}t.CometsService=o},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Comet=void 0;const i=s(0),n=s(3);t.Comet=class{constructor(e,t){this.speed=3,this.scene=e,this.body=this.scene.add.image(n.getRandomInt(0,i.CONFIG.width),n.getRandomInt(0,i.CONFIG.height),"comet"),this.updateParams()}updateParams(){const{body:e}=this;e.setAlpha(.03+.1*Math.random()),e.setScale(.2,.75+.5*Math.random()),this.speed=n.getRandomInt(3,7)}refreshPosition(){const{body:e}=this;e.x=n.getRandomInt(0,i.CONFIG.width),e.y=-100}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Player=void 0;const i=s(0),n=s(2),a=s(1),o=s(3),r=s(7);t.Player=class{constructor(e){this.scale=.6,this.bodySize=26,this.speed=5,this.bulletSpeed=10,this.lastShootTime=0,this.shootTime=320,this.hp=100,this.maxHp=100,this.weaponDamage=10,this.angle=0,this.scene=e,this.body=this.scene.physics.add.image(300,300,"player-ship"),this.lastShootTime=e.gameTime+100,this.init()}init(){const{scene:e,scale:t}=this;this.body.setScale(t),this.body.setDepth(100),this.body.setImmovable(!0),e.add.existing(this.body)}act(e,t){this.update(e,t)}update(e,t){this.body.active&&(this.updateBody(e,t),this.updateShooting(e,t),this.updateMovement(e,t),this.updateAngle(e,t))}updateBody(e,t){const{scale:s,bodySize:i}=this,n=o.getOffsetToAngle(this.angle+Math.PI,10),a=o.getCenterBody(this.body.displayWidth,this.body.displayHeight,s,i,n);this.body.setCircle(i,a.x,a.y)}updateShooting(e,t){const{scene:s}=this,i=s.input.activePointer;i.isDown&&this.shoot(new n.Vector(i.x,i.y))}updateMovement(e,t){const{scene:s,body:n}=this,a=s.input.keyboard.createCursorKeys(),o=t/i.CONFIG.scene.delta;let r=this.speed*o;(a.up.isDown||a.down.isDown)&&(a.right.isDown||a.left.isDown)&&(r*=.8),a.up.isDown?n.y-=r:a.down.isDown&&(n.y+=r),a.right.isDown?n.x+=r:a.left.isDown&&(n.x-=r),n.x<0&&(n.x=0),n.y<i.CONFIG.scene.minYPos&&(n.y=i.CONFIG.scene.minYPos),n.x>i.CONFIG.width&&(n.x=i.CONFIG.width),n.y>i.CONFIG.height&&(n.y=i.CONFIG.height)}updateAngle(e,t){const{scene:s,body:i}=this,a=s.input.activePointer;this.angle=o.getAngleBetween(new n.Vector(a.x,a.y),new n.Vector(i.x,i.y)),this.body.angle=o.angleToDegrees(this.angle)+90}shoot(e){const{scene:t,body:s,bulletSpeed:i,weaponDamage:h}=this,c=t.gameTime;if(c>this.lastShootTime){const t=o.getAngleBetween(e,new n.Vector(s.x,s.y));this.scene.bullets.push(new r.SphereBullet(this.scene,new n.Vector(s.x,s.y),a.Owner.player,{speed:o.getOffsetToAngle(t,i),angle:t,sprite:"laser-green",explodeSprite:"green-explode",damage:h})),this.lastShootTime=c+this.shootTime}}damage(e){this.hp-=e,this.hp<=0&&this.destroy()}destroy(){const{scene:e,body:t}=this;e.utils.tripleExplode(t.x,t.y),t.destroy(),e.onFail(),e.shakeScreen()}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.preload=void 0,t.preload=function(){this.load.image("background","assets/images/background/gray.jpg"),this.load.image("player-ship","assets/images/ships/player-ship.png"),this.load.image("enemy-bot-ship","assets/images/ships/enemy-ship-2.png"),this.load.image("enemy-hunter-ship","assets/images/ships/enemy-hunter.png"),this.load.image("enemy-ufo","assets/images/ships/enemy-ufo.png"),this.load.image("enemy-flyer","assets/images/ships/enemy-flyer.png"),this.load.image("laser-green","assets/images/bullets/laser-green-3.png"),this.load.image("laser-red","assets/images/bullets/laser-red-2.png"),this.load.image("sphere-bullet","assets/images/bullets/sphere-bullet.png"),this.load.image("green-explode","assets/images/effects/green-explode.png"),this.load.image("red-explode","assets/images/effects/red-explode.png"),this.load.image("orange-explode","assets/images/effects/orange-explode.png"),this.load.image("star","assets/images/effects/star-4.png"),this.load.image("fire","assets/images/effects/fire-3.png"),this.load.image("comet","assets/images/effects/comet.png"),this.load.image("meteor-1","assets/images/effects/meteor-gray-1.png"),this.load.image("meteor-2","assets/images/effects/meteor-gray-2.png"),this.load.image("meteor-3","assets/images/effects/meteor-gray-3.png"),this.load.image("meteor-4","assets/images/effects/meteor-gray-4.png"),this.load.audio("laser-1",["assets/audio/sfx_laser1.ogg"]),this.load.audio("laser-2",["assets/audio/sfx_laser2.ogg"]),this.load.image("coin-bronze","assets/images/bonus/star-bronze.png"),this.load.image("coin-silver","assets/images/bonus/star-silver.png")}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Utils=void 0;const i=s(2),n=s(60),a=s(3),o=s(15);t.Utils=class{constructor(e){this.scene=e}explode(e,t){const{scene:s}=this;s.effects.push(new o.Explode(s,new i.Vector(e,t),{sprite:"orange-explode"}))}tripleExplode(e,t){const s=360*Math.random()/3;for(let i=0;i<3;i++){const n=a.angleToRadians(120*i+s);this.explode(e+30*Math.cos(n),t+30*Math.sin(n))}}createBonus(e,t){const{scene:s}=this;s.bonuses.push(new n.Coin(s,new i.Vector(e,t)))}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Coin=void 0;const i=s(61),n={0:{sprite:"coin-bronze",cost:5},1:{sprite:"coin-silver",cost:7},2:{sprite:"coin-gold",cost:10}};class a extends i.Bonus{constructor(e,t){super(e),this.lifeTime=5e3;const s=n[(()=>{const e=Math.random();return e>.5?0:e>.2?1:2})()];this.cost=s.cost,this.body=this.scene.physics.add.image(t.x,t.y,s.sprite),this.creationTime=e.gameTime,this.init()}init(){this.body.setDepth(10),this.body.setCircle(16),this.initCollisions()}initCollisions(){const{scene:e}=this;e.physics.add.collider(this.body,e.player.body,()=>{e.score+=this.cost,this.destroy()})}act(){this.update()}update(){const{scene:e,body:t}=this,s=e.gameTime;t.angle+=3*Math.sin(.003*s),s>this.creationTime+this.lifeTime&&this.destroy()}}t.Coin=a},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Bonus=void 0;t.Bonus=class{constructor(e){this.scene=e}act(){}destroy(){const{body:e}=this;this.scene.bonuses=this.scene.bonuses.filter(e=>e!==this),e.destroy()}}},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.getInitialGameData=void 0;t.getInitialGameData=()=>({totalKills:0,kills:{bot:0,hunter:0,flyer:0,ufo:0}})},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.MenuScene=void 0;const i=s(5),n=s(2),a=s(0),o=s(8),r=s(1),h=s(9);let c=!1;const l=a.CONFIG.width/2;class d extends h.Scene{constructor(){super({key:r.SceneName.menu})}preload(){this.load.image("coin-gold","assets/images/bonus/star-gold.png"),c||(this.load.bitmapFont("atari","assets/fonts/atari/bitmap/gem.png","assets/fonts/atari/bitmap/gem.xml"),c=!0)}create(){this.graphics=this.add.graphics({lineStyle:{width:2,color:i.COLORS.white},fillStyle:{color:i.COLORS.white}}),this.createTitle(l,155),this.createSubtitle(l,200),new o.UICosmons(this,{pos:new n.Vector(l,245),value:this.getData().score,isCentered:!0,depth:100}),this.createLevelText(l,320),this.createStartButton(l,355),this.createLabButton(l,420)}update(){this.rainbowText.update()}createTitle(e,t){this.add.bitmapText(e,t,"atari",a.CONFIG.title,32).setOrigin(.5)}createSubtitle(e,t){this.rainbowText=new o.UIRainbowText(this,{pos:new n.Vector(e,t),text:a.CONFIG.subtitle})}createLevelText(e,t){const s=this.getData().level,i=`Next level: ${s+1}. ${a.LEVELS_CONFIG[s].title}`;this.add.dynamicBitmapText(e,t,"atari",i,19).setOrigin(.5)}createStartButton(e,t){new o.UIButton(this,e,t,"",{width:180,height:46,text:"Start game"}).on("pointerdown",()=>{this.scene.start(r.SceneName.preview,{level:this.getData().level})})}createLabButton(e,t){new o.UIButton(this,e,t,"",{width:180,height:46,text:"Lab",disabled:!0}).on("pointerdown",()=>{console.log("lab")})}}t.MenuScene=d},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.FailScene=void 0;const i=s(5),n=s(2),a=s(0),o=s(8),r=s(1),h=s(9);class c extends h.Scene{constructor(){super({key:r.SceneName.fail})}preload(){}init(e){this.params=e}create(){let e=a.CONFIG.height/2-90;this.rainbowTitle=new o.UIRainbowText(this,{pos:new n.Vector(a.CONFIG.width/2,e),text:a.CONFIG.scene.failTitleText,fontSize:28,color:i.COLORS.red}),e+=20;const t=new Phaser.GameObjects.BitmapText(this,a.CONFIG.width/2,e,"atari",a.CONFIG.scene.failSubtitleText,19);t.setOrigin(.5,0).setCenterAlign().setTint(i.COLORS.white),this.add.existing(t),e+=67,this.createTryAgainButton(e),e+=65,this.createMenuButton(e)}update(){this.rainbowTitle.update()}createMenuButton(e){new o.UIButton(this,a.CONFIG.width/2,e,"",{width:160,height:46,text:"Go to menu"}).on("pointerdown",()=>{this.scene.start(r.SceneName.menu)})}createTryAgainButton(e){const t=new o.UIButton(this,a.CONFIG.width/2,e,"",{width:160,height:46,text:"Try again"}),s={level:this.getData().level};t.on("pointerdown",()=>{this.scene.start(r.SceneName.game,s)})}}t.FailScene=c},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.WinScene=void 0;const i=s(2),n=s(0),a=s(8),o=s(1),r=s(9);class h extends r.Scene{constructor(){super({key:o.SceneName.win})}preload(){}init(e){this.params=e}create(){var e;const t=n.CONFIG.width/2;let s=n.CONFIG.height/2-180;const i=this.getData(),{score:a,isFlawlessVictory:o}=this.params,r=(null===(e=i.levels[i.level])||void 0===e?void 0:e.score)||0,h=o?Math.ceil(.25*a):0,c=a+h,l=r<c?c-r:0,d={currentLevel:i.level,score:a,totalScore:c,bestLevelScore:r,flawlessVictoryScores:h,plusScore:l};this.createTitle(t,s),s+=35,this.createScores(t,s,d),s+=170,this.createNextButton(s),s+=65,this.createTryAgainButton(s),s+=65,this.createMenuButton(s),this.updateGlobalData(d)}update(){this.rainbowTitle.update()}createTitle(e,t){this.rainbowTitle=new a.UIRainbowText(this,{pos:new i.Vector(e,t),text:n.CONFIG.scene.winTitleText,fontSize:28})}createScores(e,t,s){const n=`Score: ${s.score}\nFlawless victory: ${s.flawlessVictoryScores}\nBest score: ${s.bestLevelScore}\nTotal score: ${s.totalScore}`,o=new Phaser.GameObjects.BitmapText(this,e,t,"atari",n,18).setOrigin(.5,0).setCenterAlign();this.add.existing(o),new a.UICosmons(this,{pos:new i.Vector(e,t+120),isCentered:!0,value:s.plusScore,prefix:"+",depth:100})}createNextButton(e){const t=this.getData().level;new a.UIButton(this,n.CONFIG.width/2,e,"",{width:160,height:46,text:"Next level",disabled:n.CONFIG.levelsCount<=t+1}).on("pointerdown",()=>{this.setData("level",t+1);const e={level:this.getData().level};this.scene.start(o.SceneName.preview,e)})}createTryAgainButton(e){const t=new a.UIButton(this,n.CONFIG.width/2,e,"",{width:160,height:46,text:"Try again"}),s={level:this.getData().level};t.on("pointerdown",()=>{this.scene.start(o.SceneName.game,s)})}createMenuButton(e){const t=this.getData(),{level:s,levels:i}=t;new a.UIButton(this,n.CONFIG.width/2,e,"",{width:160,height:46,text:"Go to menu"}).on("pointerdown",()=>{s+1<n.CONFIG.levelsCount&&this.setData("level",s+1),this.scene.start(o.SceneName.menu)})}updateGlobalData(e){const t=this.getData();e.bestLevelScore<e.totalScore&&(this.setData("levels",Object.assign(Object.assign({},t.levels),{[e.currentLevel]:{score:e.totalScore}})),this.setData("score",t.score+e.plusScore))}}t.WinScene=h},function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.PreviewScene=void 0;const i=s(5),n=s(0),a=s(8),o=s(1),r=s(9);class h extends r.Scene{constructor(){super({key:o.SceneName.preview})}init(e){this.params=e}create(){const{params:e}=this,{level:t}=e,{title:s,text:a,mission:o}=n.LEVELS_CONFIG[t],r=n.CONFIG.height/2,h=new Phaser.GameObjects.BitmapText(this,n.CONFIG.width/2,0,"atari",`${t+1}. ${s}`,32);h.setOrigin(.5,0).setCenterAlign();const c=new Phaser.GameObjects.BitmapText(this,n.CONFIG.width/2,0,"atari",a,18);c.setMaxWidth(400).setOrigin(.5,0).setCenterAlign();const l=new Phaser.GameObjects.BitmapText(this,n.CONFIG.width/2,0,"atari",o,18);l.setMaxWidth(400).setOrigin(.5,0).setCenterAlign().setTint(i.COLORS.green);const d=r-(h.height+c.height+l.height+100)/2+5;h.y=d-25,c.y=h.y+65,l.y=c.y+c.height+25,this.add.existing(h),this.add.existing(c),this.add.existing(l),this.drawButton(l.y+l.height+45)}drawButton(e){const t=new a.UIButton(this,n.CONFIG.width/2,e,"",{width:120,height:46,text:"Go"}),s={level:this.params.level};t.on("pointerdown",()=>{this.scene.start(o.SceneName.game,s)})}}t.PreviewScene=h}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		return result;
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		0: 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push([21,1]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isDev = exports.GAME_CONFIG = exports.LEVELS_CONFIG = exports.ENEMIES_CONFIG = exports.CONFIG = void 0;
+var config_1 = __webpack_require__(22);
+Object.defineProperty(exports, "CONFIG", { enumerable: true, get: function () { return config_1.CONFIG; } });
+var enemies_1 = __webpack_require__(19);
+Object.defineProperty(exports, "ENEMIES_CONFIG", { enumerable: true, get: function () { return enemies_1.ENEMIES_CONFIG; } });
+var levels_1 = __webpack_require__(13);
+Object.defineProperty(exports, "LEVELS_CONFIG", { enumerable: true, get: function () { return levels_1.LEVELS_CONFIG; } });
+var game_1 = __webpack_require__(17);
+Object.defineProperty(exports, "GAME_CONFIG", { enumerable: true, get: function () { return game_1.GAME_CONFIG; } });
+exports.isDev = "production" === "development";
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(__webpack_require__(28), exports);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Vector = void 0;
+var Vector_1 = __webpack_require__(23);
+Object.defineProperty(exports, "Vector", { enumerable: true, get: function () { return Vector_1.Vector; } });
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(__webpack_require__(25), exports);
+__exportStar(__webpack_require__(14), exports);
+__exportStar(__webpack_require__(26), exports);
+__exportStar(__webpack_require__(27), exports);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Service = void 0;
+class Service {
+    constructor(scene) {
+        this.scene = scene;
+    }
+}
+exports.Service = Service;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HEX_COLORS = exports.COLORS = void 0;
+exports.COLORS = {
+    white: 0xffffff,
+    green: 0x00ff00,
+    red: 0xff0000,
+    gray: 0xdddddd,
+    yellow: 0xfc841f,
+};
+exports.HEX_COLORS = {
+    white: "#ffffff",
+    green: "#00ff00",
+};
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Enemy = void 0;
+const components_1 = __webpack_require__(2);
+const config_1 = __webpack_require__(0);
+class Enemy {
+    constructor(scene, name) {
+        this.isOutOfWorld = false;
+        this.angle = 0;
+        this.scene = scene;
+        this.name = name;
+    }
+    act(time, delta) { }
+    updateWorldCollisions(time, delta) {
+        const { isOutOfWorld } = this;
+        if (this.isOutsideScene(100)) {
+            if (!isOutOfWorld) {
+                const xRange = 250;
+                const yRange = 150;
+                const x = config_1.CONFIG.width / 2 - xRange + Math.random() * (xRange * 2);
+                const y = config_1.CONFIG.height / 2 - yRange + Math.random() * (yRange * 2);
+                const nextTarget = new components_1.Vector(x, y);
+                this.onOutOfWorld(nextTarget);
+            }
+            this.isOutOfWorld = true;
+        }
+        else {
+            this.isOutOfWorld = false;
+        }
+    }
+    damage(value) {
+        this.hp -= value;
+        if (this.hp <= 0) {
+            this.destroy();
+        }
+    }
+    destroy() {
+        const { scene, body, coinChance } = this;
+        scene.enemies = scene.enemies.filter((b) => b !== this);
+        body.destroy();
+        const stats = scene.getStats();
+        if (Math.random() > 1 - coinChance) {
+            scene.utils.createBonus(body.x, body.y);
+        }
+        stats.kills[this.name] += 1;
+        stats.totalKills += 1;
+        scene.shakeScreen();
+    }
+    isOutsideScene(value = 0) {
+        const { body } = this;
+        if (body.x < value || body.x > config_1.CONFIG.width - value || body.y < value || body.y > config_1.CONFIG.height - value) {
+            return true;
+        }
+        return false;
+    }
+    onOutOfWorld(nextTarget) { }
+}
+exports.Enemy = Enemy;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SphereBullet = exports.Bullet = void 0;
+var Bullet_1 = __webpack_require__(18);
+Object.defineProperty(exports, "Bullet", { enumerable: true, get: function () { return Bullet_1.Bullet; } });
+var Sphere_1 = __webpack_require__(29);
+Object.defineProperty(exports, "SphereBullet", { enumerable: true, get: function () { return Sphere_1.Sphere; } });
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIRainbowText = exports.UICosmons = exports.UIButton = void 0;
+var Button_1 = __webpack_require__(46);
+Object.defineProperty(exports, "UIButton", { enumerable: true, get: function () { return Button_1.UIButton; } });
+var Cosmons_1 = __webpack_require__(47);
+Object.defineProperty(exports, "UICosmons", { enumerable: true, get: function () { return Cosmons_1.UICosmons; } });
+var RainbowText_1 = __webpack_require__(48);
+Object.defineProperty(exports, "UIRainbowText", { enumerable: true, get: function () { return RainbowText_1.UIRainbowText; } });
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Scene = void 0;
+const config_1 = __webpack_require__(0);
+class Scene extends Phaser.Scene {
+    getData() {
+        return this.game.data;
+    }
+    setData(key, value) {
+        this.game.data[key] = value;
+        if (config_1.isDev) {
+            console.log(`[${key}] was updated in global data:`, this.game.data);
+        }
+    }
+}
+exports.Scene = Scene;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Flyer = exports.UFO = exports.Hunter = exports.Bot = exports.Enemy = void 0;
+var Enemy_1 = __webpack_require__(6);
+Object.defineProperty(exports, "Enemy", { enumerable: true, get: function () { return Enemy_1.Enemy; } });
+var Bot_1 = __webpack_require__(24);
+Object.defineProperty(exports, "Bot", { enumerable: true, get: function () { return Bot_1.Bot; } });
+var Hunter_1 = __webpack_require__(33);
+Object.defineProperty(exports, "Hunter", { enumerable: true, get: function () { return Hunter_1.Hunter; } });
+var UFO_1 = __webpack_require__(34);
+Object.defineProperty(exports, "UFO", { enumerable: true, get: function () { return UFO_1.UFO; } });
+var Flyer_1 = __webpack_require__(35);
+Object.defineProperty(exports, "Flyer", { enumerable: true, get: function () { return Flyer_1.Flyer; } });
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Effect = void 0;
+class Effect {
+    constructor(scene) {
+        this.scene = scene;
+    }
+    act() { }
+    destroy() {
+        const { body } = this;
+        this.scene.effects = this.scene.effects.filter((b) => b !== this);
+        body.destroy();
+    }
+}
+exports.Effect = Effect;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Level = void 0;
+const types_1 = __webpack_require__(1);
+const config_1 = __webpack_require__(0);
+const levels_1 = __webpack_require__(13);
+class Level {
+    constructor(scene) {
+        this.nextAttemptTime = 0;
+        this.levelState = null;
+        this.scene = scene;
+        const levelNumber = +this.constructor.name.slice(5) - 1;
+        this.mode = levels_1.LEVELS_CONFIG[levelNumber].mode;
+        if (this.mode.type === types_1.GameMode.waves) {
+            this.setLevelState(0);
+        }
+    }
+    setLevelState(levelNumber) {
+        const { mode } = this;
+        if (mode.type === types_1.GameMode.waves) {
+            const maxMaves = mode.target.length;
+            if (levelNumber >= maxMaves) {
+                this.levelState = {
+                    waveNumber: levelNumber,
+                    enemies: [],
+                    maxEnemies: 0,
+                };
+            }
+            else {
+                this.levelState = {
+                    waveNumber: levelNumber,
+                    enemies: [...mode.target[levelNumber].enemies],
+                    maxEnemies: mode.target[levelNumber].maxEnemies,
+                };
+            }
+        }
+    }
+    update() {
+        const { scene, nextAttemptTime, nextAttemptTimeInterval } = this;
+        const time = scene.gameTime;
+        if (time > nextAttemptTime) {
+            this.makeAttempt();
+            this.nextAttemptTime = time + nextAttemptTimeInterval;
+        }
+        this.updateStatus();
+    }
+    updateStatus() {
+        const { scene, mode } = this;
+        const stats = scene.getStats();
+        const modeType = mode.type;
+        switch (mode.type) {
+            case types_1.GameMode.totalKills: {
+                const targetKills = +mode.target;
+                this.status = targetKills - stats.totalKills;
+                break;
+            }
+            case types_1.GameMode.enemyKills: {
+                const targets = mode.target;
+                const targetsCount = Object.values(targets).reduce((acc, e) => acc + e, 0);
+                const targetsKilled = Object.keys(targets).reduce((acc, e) => {
+                    const maxKills = targets[e];
+                    return acc + Math.min(maxKills, stats.kills[e] || 0);
+                }, 0);
+                this.status = targetsCount - targetsKilled;
+                break;
+            }
+            case types_1.GameMode.time: {
+                this.status = Math.ceil(+mode.target - scene.gameTime / 1000);
+                break;
+            }
+            case types_1.GameMode.waves: {
+                const maxWaves = mode.target.length;
+                this.status = maxWaves - this.levelState.waveNumber;
+                break;
+            }
+            default: {
+                throw new Error(`Mode "${modeType}" is not set or not defined!`);
+            }
+        }
+        this.status = Math.max(this.status, 0);
+    }
+    getTextByMode() {
+        if (this.status === undefined)
+            return "";
+        return this.status.toString();
+    }
+    checkForWin() {
+        const { status } = this;
+        if (status === undefined)
+            return false;
+        return status <= 0;
+    }
+    createEnemy(EnemyConstructor) {
+        const { scene } = this;
+        const mapping = {
+            x: config_1.CONFIG.width,
+            y: config_1.CONFIG.height,
+        };
+        const axis = Math.random() > 0.5 ? "y" : "x";
+        const points = [-50, mapping[axis] + 50];
+        const pointIndex = Math.floor(Math.random() * 2);
+        const resultPoint = points[pointIndex];
+        const spawnPoint = {
+            x: axis === "x" ? resultPoint : Math.random() * config_1.CONFIG.width,
+            y: axis === "y" ? resultPoint : Math.random() * config_1.CONFIG.height,
+        };
+        scene.enemies.push(new EnemyConstructor(scene, spawnPoint));
+    }
+    makeAttempt() {
+        const { scene, mode, levelState } = this;
+        if (mode.type === types_1.GameMode.waves) {
+            const { maxEnemies, enemies } = levelState;
+            const maxMaves = mode.target.length;
+            const enemiesCount = scene.enemies.length;
+            if (enemiesCount < maxEnemies) {
+                const nextEnemy = enemies.shift();
+                if (nextEnemy) {
+                    this.createEnemy(nextEnemy);
+                }
+                else if (enemiesCount <= 0 && levelState.waveNumber < maxMaves) {
+                    this.setLevelState(levelState.waveNumber + 1);
+                }
+            }
+        }
+    }
+}
+exports.Level = Level;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LEVELS_CONFIG = void 0;
+const enemies_1 = __webpack_require__(10);
+const types_1 = __webpack_require__(1);
+const helpers_1 = __webpack_require__(36);
+exports.LEVELS_CONFIG = [
+    helpers_1.getLevelConfig({
+        level: 0,
+        title: "Red Alert",
+        text: `Space invaders have attacked our base. Come back and find out the reason for the invasion.
+    \nWarning! A lot of invaders have been detected on our way.`,
+        mode: {
+            type: types_1.GameMode.totalKills,
+            target: 30,
+        },
+    }),
+    helpers_1.getLevelConfig({
+        level: 1,
+        title: "Hunters",
+        text: `Hunters in sight. It's the most common units among the enemy ships. Be careful, they follow for their targets.`,
+        mode: {
+            type: types_1.GameMode.enemyKills,
+            target: {
+                hunter: 15,
+            },
+        },
+    }),
+    helpers_1.getLevelConfig({
+        level: 2,
+        title: "UFO",
+        text: `Seems like aliens are also against us. Or maybe their ships were hijacked?`,
+        mode: {
+            type: types_1.GameMode.time,
+            target: 150,
+        },
+    }),
+    helpers_1.getLevelConfig({
+        level: 3,
+        title: "Defense",
+        text: `Ok, we are on the base. Take the hit and help your allies to protect the one.`,
+        mode: {
+            type: types_1.GameMode.waves,
+            target: [
+                {
+                    maxEnemies: 4,
+                    enemies: [enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Hunter, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter],
+                },
+                {
+                    maxEnemies: 4,
+                    enemies: [enemies_1.Hunter, enemies_1.Hunter, enemies_1.Hunter, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Hunter],
+                },
+                {
+                    maxEnemies: 4,
+                    enemies: [enemies_1.Hunter, enemies_1.Hunter, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot],
+                },
+                {
+                    maxEnemies: 5,
+                    enemies: [enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.UFO, enemies_1.Hunter, enemies_1.UFO, enemies_1.Bot, enemies_1.UFO, enemies_1.Hunter, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot, enemies_1.Bot, enemies_1.UFO, enemies_1.Bot, enemies_1.Hunter, enemies_1.Bot],
+                },
+                {
+                    maxEnemies: 5,
+                    enemies: [enemies_1.Hunter, enemies_1.Hunter, enemies_1.Hunter, enemies_1.UFO, enemies_1.UFO, enemies_1.Hunter, enemies_1.Hunter, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Bot, enemies_1.Hunter, enemies_1.UFO, enemies_1.Hunter, enemies_1.Bot, enemies_1.UFO, enemies_1.Hunter, enemies_1.Bot, enemies_1.UFO, enemies_1.UFO, enemies_1.Hunter],
+                },
+            ],
+        },
+    }),
+];
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.spreadRadians = exports.spreadAngle = exports.getAngleDiff = exports.getOffsetToAngle = exports.getNearestAngle = exports.angleToRadians = exports.angleToDegrees = exports.getAngleBetween = void 0;
+const components_1 = __webpack_require__(2);
+// returns number in radians
+function getAngleBetween(obj1, obj2) {
+    const xDiff = obj1.x - obj2.x;
+    const yDiff = obj1.y - obj2.y;
+    let result = Math.atan2(yDiff, xDiff);
+    if (result < 0)
+        result += Math.PI * 2;
+    return result;
+}
+exports.getAngleBetween = getAngleBetween;
+function angleToDegrees(angle) {
+    return (angle / Math.PI) * 180;
+}
+exports.angleToDegrees = angleToDegrees;
+function angleToRadians(angle) {
+    return (angle * Math.PI) / 180;
+}
+exports.angleToRadians = angleToRadians;
+function getNearestAngle(currentAngle, targetAngle, step) {
+    if (Math.abs(currentAngle - targetAngle) < 2)
+        return currentAngle;
+    if (Math.abs(currentAngle - targetAngle) < 180) {
+        // Rotate current directly towards target.
+        if (currentAngle < targetAngle)
+            currentAngle += step;
+        else
+            currentAngle -= step;
+    }
+    else {
+        // Rotate the other direction towards target.
+        if (currentAngle < targetAngle)
+            currentAngle -= step;
+        else
+            currentAngle += step;
+    }
+    return ((currentAngle % 360) + 360) % 360;
+}
+exports.getNearestAngle = getNearestAngle;
+const getOffsetToAngle = (radians, distance) => {
+    return new components_1.Vector(Math.cos(radians) * distance, Math.sin(radians) * distance);
+};
+exports.getOffsetToAngle = getOffsetToAngle;
+const getAngleDiff = (angle1, angle2) => {
+    const a = Math.abs(angle1 - angle2);
+    return Math.abs(((a + 180) % 360) - 180);
+};
+exports.getAngleDiff = getAngleDiff;
+const spreadAngle = (angle, spread) => {
+    return angle - spread + Math.random() * (spread * 2);
+};
+exports.spreadAngle = spreadAngle;
+const spreadRadians = (radians, rangeAngle) => {
+    return exports.spreadAngle(radians, angleToRadians(rangeAngle));
+};
+exports.spreadRadians = spreadRadians;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Shadow = exports.Fire = exports.Explode = exports.Effect = void 0;
+var Effect_1 = __webpack_require__(11);
+Object.defineProperty(exports, "Effect", { enumerable: true, get: function () { return Effect_1.Effect; } });
+var Explode_1 = __webpack_require__(30);
+Object.defineProperty(exports, "Explode", { enumerable: true, get: function () { return Explode_1.Explode; } });
+var Fire_1 = __webpack_require__(31);
+Object.defineProperty(exports, "Fire", { enumerable: true, get: function () { return Fire_1.Fire; } });
+var Shadow_1 = __webpack_require__(32);
+Object.defineProperty(exports, "Shadow", { enumerable: true, get: function () { return Shadow_1.Shadow; } });
+
+
+/***/ }),
+/* 16 */,
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.INITIAL_GAME_DATA = exports.GAME_CONFIG = void 0;
+const config_1 = __webpack_require__(0);
+const Game_1 = __webpack_require__(37);
+const Menu_1 = __webpack_require__(63);
+const Fail_1 = __webpack_require__(64);
+const Win_1 = __webpack_require__(65);
+const Preview_1 = __webpack_require__(66);
+const config_2 = __webpack_require__(0);
+exports.GAME_CONFIG = {
+    type: Phaser.AUTO,
+    width: config_1.CONFIG.width,
+    height: config_1.CONFIG.height,
+    // scale: {
+    //   mode: Phaser.Scale.FIT,
+    //   parent: "phaser-example",
+    //   autoCenter: Phaser.Scale.CENTER_BOTH,
+    //   width: 800,
+    //   height: 600,
+    // },
+    physics: {
+        default: "arcade",
+        arcade: {
+            gravity: { y: 0 },
+            debug: false,
+        },
+    },
+    scene: [Menu_1.MenuScene, Game_1.GameScene, Preview_1.PreviewScene, Fail_1.FailScene, Win_1.WinScene],
+};
+exports.INITIAL_GAME_DATA = {
+    level: !config_2.isDev ? 0 : 2,
+    levels: {},
+    score: 0,
+};
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Bullet = void 0;
+const config_1 = __webpack_require__(0);
+const types_1 = __webpack_require__(1);
+class Bullet {
+    constructor(scene, pos, owner, damage) {
+        this.scene = scene;
+        this.pos = pos;
+        this.owner = owner;
+        this.damage = damage;
+    }
+    act(time, delta) { }
+    update(time, delta) {
+        const { body } = this;
+        if (body.x < 0 || body.x > config_1.CONFIG.width || body.y < 0 || body.y > config_1.CONFIG.height) {
+            this.destroy();
+        }
+    }
+    initCollisions() {
+        const { scene, owner, damage } = this;
+        if (owner === types_1.Owner.player) {
+            scene.enemies.forEach((enemy) => {
+                scene.physics.add.collider(this.body, enemy.body, () => {
+                    this.explode();
+                    enemy.damage(damage);
+                });
+            });
+        }
+        else {
+            scene.physics.add.collider(this.body, scene.player.body, () => {
+                this.explode();
+                scene.player.damage(damage);
+            });
+        }
+    }
+    explode() { }
+    destroy() {
+        const { body } = this;
+        this.scene.bullets = this.scene.bullets.filter((b) => b !== this);
+        body.destroy();
+    }
+}
+exports.Bullet = Bullet;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ENEMIES_CONFIG = void 0;
+exports.ENEMIES_CONFIG = {
+    bot: {
+        pluralName: ["bot", "bots", "bots"],
+    },
+    hunter: {
+        pluralName: ["hunter", "hunters", "hunters"],
+    },
+    ufo: {
+        pluralName: ["ufo", "ufo", "ufo"],
+    },
+    flyer: {
+        pluralName: ["flyer", "flyers", "flyers"],
+    },
+};
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIComponent = void 0;
+class UIComponent {
+    constructor(scene) {
+        this.scene = scene;
+    }
+}
+exports.UIComponent = UIComponent;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Game = void 0;
+__webpack_require__(16);
+const game_1 = __webpack_require__(17);
+const config_1 = __webpack_require__(0);
+class Game extends Phaser.Game {
+    constructor(config) {
+        super(config);
+        this.data = game_1.INITIAL_GAME_DATA;
+    }
+}
+exports.Game = Game;
+window.addEventListener("load", () => {
+    const game = new Game(game_1.GAME_CONFIG);
+    if (config_1.isDev) {
+        console.log("game", game);
+    }
+});
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CONFIG = void 0;
+const levels_1 = __webpack_require__(13);
+exports.CONFIG = {
+    title: "Space Invaders",
+    subtitle: "The battle for the galaxy",
+    width: 800,
+    height: 600,
+    levelsCount: levels_1.LEVELS_CONFIG.length,
+    scene: {
+        delta: 16,
+        minYPos: 100,
+        failTimeoutTime: 2000,
+        winTimeoutTime: 2000,
+        failTitleText: 'MISSION FAILED',
+        failSubtitleText: 'Your ship was destroyed.',
+        winTitleText: 'MISSION COMPLETED',
+    },
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Vector = void 0;
+class Vector {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+exports.Vector = Vector;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Bot = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const helpers_1 = __webpack_require__(3);
+const types_1 = __webpack_require__(1);
+const Enemy_1 = __webpack_require__(6);
+const bullets_1 = __webpack_require__(7);
+class Bot extends Enemy_1.Enemy {
+    // private lastFireTime: number = 0;
+    // private fireReloadTime: number = 100;
+    // private laserSound: Phaser.Sound.BaseSound;
+    constructor(scene, params) {
+        super(scene, types_1.EnemyName.bot);
+        this.coinChance = 0.9;
+        this.weaponDamage = 10;
+        this.bodySize = 32;
+        this.depth = 50;
+        this.scale = 0.6;
+        this.speed = 2;
+        this.rotateSpeed = 2;
+        this.hp = 30;
+        this.bulletSpeed = 7;
+        this.lastShoot = 0;
+        this.shootTime = 1200;
+        this.shootTimeRange = 200;
+        this.changeTargetInterval = 1000;
+        this.changeTargetIntervalRange = 2000;
+        this.body = scene.physics.add.image(params.x, params.y, "enemy-bot-ship");
+        // this.laserSound = scene.sound.add("laser-1");
+        this.init();
+        this.defineTarget = this.defineTarget.bind(this);
+        this.defineTarget();
+    }
+    init() {
+        const { scale, depth, body, bodySize } = this;
+        body.setScale(scale);
+        body.setImmovable(true);
+        body.setDepth(depth);
+        const speed = 1.5 + Math.random();
+        this.speed = speed;
+        this.rotateSpeed = speed;
+        const centerPos = helpers_1.getCenterBody(body.displayWidth, body.displayHeight, scale, bodySize);
+        body.setCircle(bodySize, centerPos.x, centerPos.y);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        const { scene } = this;
+        this.updateWorldCollisions(time, delta);
+        this.updateBase(time, delta);
+        if (this.scene.gameTime > this.lastShoot) {
+            const playerBody = scene.player.body;
+            this.shoot(new components_1.Vector(playerBody.x, playerBody.y));
+        }
+    }
+    updateBase(time, delta) {
+        const { body, angle, targetAngle, rotateSpeed } = this;
+        this.body.angle = angle - 90;
+        const angleInRadians = helpers_1.angleToRadians(angle);
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        body.x += this.speed * Math.cos(angleInRadians) * deltaSpeed;
+        body.y += this.speed * Math.sin(angleInRadians) * deltaSpeed;
+        this.angle = helpers_1.getNearestAngle(angle, targetAngle, rotateSpeed);
+    }
+    defineTarget() {
+        const { changeTargetInterval, changeTargetIntervalRange } = this;
+        const target = new components_1.Vector(Math.random() * config_1.CONFIG.width, Math.random() * config_1.CONFIG.height);
+        this.setTarget(target);
+        const timeoutTime = changeTargetInterval + Math.random() * changeTargetIntervalRange;
+        this.timeout = setTimeout(this.defineTarget, timeoutTime);
+    }
+    setTarget(target) {
+        const { body } = this;
+        this.targetPos = target;
+        this.targetAngle = helpers_1.angleToDegrees(helpers_1.getAngleBetween(this.targetPos, body));
+    }
+    shoot(target) {
+        const { body, bulletSpeed, shootTimeRange, shootTime, weaponDamage } = this;
+        // this.laserSound.play();
+        const rotation = helpers_1.getAngleBetween(target, new components_1.Vector(body.x, body.y));
+        this.scene.bullets.push(new bullets_1.SphereBullet(this.scene, new components_1.Vector(body.x, body.y), types_1.Owner.enemy, {
+            speed: helpers_1.getOffsetToAngle(rotation, bulletSpeed),
+            angle: rotation,
+            sprite: "laser-red",
+            explodeSprite: "red-explode",
+            damage: weaponDamage,
+        }));
+        this.lastShoot = this.scene.gameTime + shootTime + Math.random() * shootTimeRange;
+    }
+    onOutOfWorld(nextTarget) {
+        this.setTarget(nextTarget);
+    }
+    destroy() {
+        const { scene, body } = this;
+        scene.utils.tripleExplode(body.x, body.y);
+        clearTimeout(this.timeout);
+        super.destroy();
+    }
+}
+exports.Bot = Bot;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getCenterBody = void 0;
+const components_1 = __webpack_require__(2);
+const getCenterBody = (width, height, scale, bodyWidth, offset = { x: 0, y: 0 }) => {
+    const x = width / scale / 2 - bodyWidth + offset.x;
+    const y = height / scale / 2 - bodyWidth + offset.y;
+    return new components_1.Vector(x, y);
+};
+exports.getCenterBody = getCenterBody;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getRandomInt = void 0;
+const getRandomInt = (from, to) => {
+    return Math.round(from + Math.random() * (to - from));
+};
+exports.getRandomInt = getRandomInt;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.pluralize = void 0;
+function plural(num) {
+    if (num % 10 === 1 && num % 100 !== 11) {
+        return 0;
+    }
+    if (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)) {
+        return 1;
+    }
+    return 2;
+}
+/* возвращает одну из строк в массиве в соответствии с остатком от деления
+0 товар[ов]
+1 товар
+2 товар[а]
+*/
+function pluralize(num, strings) {
+    switch (plural(num)) {
+        case 0: return strings[0];
+        case 1: return strings[1];
+        default: return strings[2];
+    }
+}
+exports.pluralize = pluralize;
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SceneName = exports.EnemyName = exports.GameMode = exports.Owner = void 0;
+var Owner;
+(function (Owner) {
+    Owner["player"] = "player";
+    Owner["enemy"] = "enemy";
+})(Owner = exports.Owner || (exports.Owner = {}));
+var GameMode;
+(function (GameMode) {
+    GameMode["totalKills"] = "totalKills";
+    GameMode["enemyKills"] = "enemyKill";
+    GameMode["time"] = "time";
+    GameMode["waves"] = "waves";
+})(GameMode = exports.GameMode || (exports.GameMode = {}));
+var EnemyName;
+(function (EnemyName) {
+    EnemyName["bot"] = "bot";
+    EnemyName["ufo"] = "ufo";
+    EnemyName["hunter"] = "hunter";
+    EnemyName["flyer"] = "flyer";
+})(EnemyName = exports.EnemyName || (exports.EnemyName = {}));
+var SceneName;
+(function (SceneName) {
+    SceneName["menu"] = "MenuScene";
+    SceneName["preview"] = "PreviewScene";
+    SceneName["game"] = "GameScene";
+    SceneName["fail"] = "FailScene";
+    SceneName["win"] = "WinScene";
+})(SceneName = exports.SceneName || (exports.SceneName = {}));
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Sphere = void 0;
+const components_1 = __webpack_require__(2);
+const config_1 = __webpack_require__(0);
+const helpers_1 = __webpack_require__(3);
+const effects_1 = __webpack_require__(15);
+const Bullet_1 = __webpack_require__(18);
+const DEFAULT_PARAMS = {
+    scale: 1,
+    bodySize: 6,
+};
+class Sphere extends Bullet_1.Bullet {
+    constructor(scene, pos, owner, params) {
+        super(scene, pos, owner, params.damage);
+        this.depth = 10;
+        this.body = scene.physics.add.image(pos.x, pos.y, params.sprite);
+        this.params = Object.assign(Object.assign({}, DEFAULT_PARAMS), params);
+        this.init();
+    }
+    init() {
+        const { body, scene, params, depth } = this;
+        const { angle, scale } = params;
+        body.setAngle(helpers_1.angleToDegrees(angle) + 90);
+        body.setDepth(depth);
+        body.setOrigin(0.5, 0.5);
+        body.setScale(scale);
+        this.initBody();
+        this.initCollisions();
+        scene.add.existing(this.body);
+    }
+    initBody() {
+        const { params } = this;
+        const { angle, scale, bodySize } = params;
+        const offset = helpers_1.getOffsetToAngle(angle, this.body.displayHeight / scale / 3);
+        const pos = helpers_1.getCenterBody(this.body.displayWidth, this.body.displayHeight, scale, bodySize, offset);
+        this.body.setCircle(bodySize, pos.x, pos.y);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    draw() { }
+    explode() {
+        const { body, scene, params } = this;
+        scene.effects.push(new effects_1.Explode(scene, new components_1.Vector(body.x, body.y), {
+            sprite: params.explodeSprite,
+        }));
+        this.destroy();
+    }
+    update(time, delta) {
+        const { body } = this;
+        const { speed } = this.params;
+        body.x += speed.x * (delta / config_1.CONFIG.scene.delta);
+        body.y += speed.y * (delta / config_1.CONFIG.scene.delta);
+        super.update(time, delta);
+    }
+}
+exports.Sphere = Sphere;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Explode = void 0;
+const Effect_1 = __webpack_require__(11);
+class Explode extends Effect_1.Effect {
+    constructor(scene, pos, params) {
+        super(scene);
+        this.body = new Phaser.GameObjects.Sprite(scene, pos.x, pos.y, params.sprite);
+        this.params = params;
+        this.startTime = scene.gameTime;
+        this.body.setScale(0);
+        this.body.setDepth(115);
+        scene.add.existing(this.body);
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const { scene, startTime } = this;
+        const diff = scene.gameTime - startTime;
+        const coef = Math.sin(diff / 150);
+        const scale = coef;
+        this.body.angle += 3;
+        this.body.setScale(scale, scale);
+        this.body.setAlpha(coef);
+        if (coef < 0.06 && diff > 100) {
+            this.destroy();
+        }
+    }
+}
+exports.Explode = Explode;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Fire = void 0;
+const angle_1 = __webpack_require__(14);
+const Effect_1 = __webpack_require__(11);
+class Fire extends Effect_1.Effect {
+    constructor(scene, pos, params) {
+        super(scene);
+        this.speed = 1.7;
+        this.body = new Phaser.GameObjects.Sprite(scene, pos.x, pos.y, "fire");
+        this.params = params;
+        this.body.setDepth(5);
+        this.body.setAngle(angle_1.angleToDegrees(params.angle) + 90);
+        this.startTime = scene.gameTime;
+        this.params = params;
+        scene.add.existing(this.body);
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const { scene, body, speed, startTime, params } = this;
+        const timeDiff = scene.gameTime - startTime;
+        body.alpha = 1 - timeDiff / 150;
+        body.x += speed * Math.cos(params.angle);
+        body.y += speed * Math.sin(params.angle);
+        if (body.alpha <= 0) {
+            this.destroy();
+        }
+    }
+}
+exports.Fire = Fire;
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Shadow = void 0;
+const Effect_1 = __webpack_require__(11);
+class Shadow extends Effect_1.Effect {
+    constructor(scene, pos, params) {
+        super(scene);
+        this.params = params;
+        this.body = new Phaser.GameObjects.Sprite(scene, pos.x, pos.y, params.sprite);
+        this.body.setScale(params.scale);
+        this.body.setAngle(params.angle);
+        this.body.setAlpha(params.alpha);
+        this.body.setDepth(0);
+        this.destroyTime = params.lifeTime + scene.gameTime;
+        scene.add.existing(this.body);
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const { scene, body, destroyTime, params } = this;
+        const { gameTime } = scene;
+        const alpha = ((destroyTime - gameTime) * params.alpha) / params.lifeTime;
+        body.setAlpha(alpha);
+        if (gameTime > this.destroyTime) {
+            this.destroy();
+        }
+    }
+}
+exports.Shadow = Shadow;
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Hunter = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const helpers_1 = __webpack_require__(3);
+const types_1 = __webpack_require__(1);
+const Enemy_1 = __webpack_require__(6);
+const bullets_1 = __webpack_require__(7);
+var Behavior;
+(function (Behavior) {
+    Behavior["moving"] = "moving";
+    Behavior["stop"] = "stop";
+    Behavior["rotate"] = "rotate";
+    Behavior["attack"] = "attack";
+})(Behavior || (Behavior = {}));
+class Hunter extends Enemy_1.Enemy {
+    constructor(scene, params) {
+        super(scene, types_1.EnemyName.hunter);
+        // shooting
+        this.weaponDamage = 10;
+        this.chanceToShoot = 0.25;
+        this.lastShootTime = 0;
+        this.shootIntervalTime = 1200;
+        // attack
+        this.attackEndTime = 0;
+        this.attackIntervalTime = 3000;
+        this.attackShootIntervalTime = 325;
+        this.attackSpreadRange = 15;
+        this.attackHunting = true;
+        // direction
+        this.lastChangeTargetTime = 0;
+        this.changeTargetInterval = 1000;
+        this.changeTargetIntervalRange = 2000;
+        this.rotateSpeed = 2;
+        this.currentRotateSpeed = this.rotateSpeed;
+        this.rotateTimer = 0;
+        this.rotateIntervalTimer = 3000;
+        // speed
+        this.maxSpeed = 2;
+        this.speed = 2;
+        this.speedIncrease = 0.05;
+        this.stopEndTime = 0;
+        this.stopIntervalTime = 3000;
+        this.stopIntervalRangeTime = 1000;
+        // base
+        this.coinChance = 0.9;
+        this.bodySize = 36;
+        this.depth = 50;
+        this.scale = 0.7;
+        this.hp = 70;
+        this.bulletSpeed = 7;
+        this.behavior = Behavior.moving;
+        this.body = scene.physics.add.image(params.x, params.y, "enemy-hunter-ship");
+        this.init();
+        this.defineTarget = this.defineTarget.bind(this);
+        this.defineTarget();
+    }
+    init() {
+        const { scale, depth, body, bodySize } = this;
+        body.setScale(scale);
+        body.setImmovable(true);
+        body.setDepth(depth);
+        const centerPos = helpers_1.getCenterBody(body.displayWidth, body.displayHeight, scale, bodySize);
+        body.setCircle(bodySize, centerPos.x, centerPos.y);
+        this.setStopEndTime(true);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(_, delta) {
+        const { scene, body, lastShootTime, shootIntervalTime, chanceToShoot, behavior, speedIncrease, stopEndTime, attackHunting, attackIntervalTime, } = this;
+        const playerBody = scene.player.body;
+        const time = scene.gameTime;
+        this.updateBase(time, delta);
+        switch (behavior) {
+            case Behavior.moving: {
+                if (this.speed < this.maxSpeed) {
+                    this.speed += speedIncrease;
+                }
+                if (time > lastShootTime) {
+                    if (Math.random() > 1 - chanceToShoot) {
+                        this.shoot(helpers_1.getAngleBetween(new components_1.Vector(playerBody.x, playerBody.y), new components_1.Vector(body.x, body.y)));
+                    }
+                    this.lastShootTime = time + shootIntervalTime;
+                }
+                if (time > this.lastChangeTargetTime) {
+                    this.updateTarget();
+                }
+                if (time > stopEndTime) {
+                    this.behavior = Behavior.stop;
+                }
+                break;
+            }
+            case Behavior.stop: {
+                if (this.speed > 0) {
+                    this.speed -= speedIncrease;
+                }
+                else {
+                    this.setRotateBehavior();
+                }
+                break;
+            }
+            case Behavior.rotate: {
+                this.setTarget(new components_1.Vector(playerBody.x, playerBody.y));
+                if (time > lastShootTime) {
+                    this.shoot(helpers_1.angleToRadians(this.angle), this.attackSpreadRange);
+                    this.lastShootTime = time + this.attackShootIntervalTime;
+                }
+                if (helpers_1.getAngleDiff(this.targetAngle, this.angle) <= 4) {
+                    this.setAttackBehavior();
+                }
+                else if (time > this.rotateTimer) {
+                    this.setMovingBehavior();
+                }
+                break;
+            }
+            case Behavior.attack: {
+                if (attackHunting || time > this.attackEndTime - attackIntervalTime / 3) {
+                    this.setTarget(new components_1.Vector(playerBody.x, playerBody.y));
+                }
+                if (this.speed < this.maxSpeed) {
+                    this.speed += speedIncrease;
+                }
+                if (time > lastShootTime) {
+                    this.shoot(helpers_1.angleToRadians(this.angle), this.attackSpreadRange);
+                    this.lastShootTime = time + this.attackShootIntervalTime;
+                }
+                if (attackHunting && time > this.attackEndTime - attackIntervalTime / 1.5) {
+                    this.attackHunting = false;
+                    this.updateTarget();
+                }
+                if (time > this.attackEndTime) {
+                    this.setMovingBehavior();
+                }
+                break;
+            }
+        }
+    }
+    updateBase(time, delta) {
+        const { body, angle, targetAngle, currentRotateSpeed } = this;
+        this.body.angle = angle - 90;
+        const angleInRadians = helpers_1.angleToRadians(angle);
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        body.x += this.speed * Math.cos(angleInRadians) * deltaSpeed;
+        body.y += this.speed * Math.sin(angleInRadians) * deltaSpeed;
+        this.angle = helpers_1.getNearestAngle(angle, targetAngle, currentRotateSpeed);
+        if (body.x < 100 || body.y < 100 || body.x > config_1.CONFIG.width - 100 || body.y > config_1.CONFIG.height - 100) {
+            // need fix
+            this.setTarget(new components_1.Vector(config_1.CONFIG.width / 2, config_1.CONFIG.height / 2));
+        }
+    }
+    updateTarget() {
+        const { scene, changeTargetInterval, changeTargetIntervalRange } = this;
+        const time = scene.gameTime;
+        this.defineTarget();
+        const intervalTime = changeTargetInterval + Math.random() * changeTargetIntervalRange;
+        this.lastChangeTargetTime = time + intervalTime;
+    }
+    defineTarget() {
+        const target = new components_1.Vector(Math.random() * config_1.CONFIG.width, Math.random() * config_1.CONFIG.height);
+        this.setTarget(target);
+    }
+    setTarget(target) {
+        const { body } = this;
+        this.setTargetAngle(helpers_1.angleToDegrees(helpers_1.getAngleBetween(target, body)));
+    }
+    setTargetAngle(angle) {
+        this.targetAngle = angle;
+    }
+    setAttackBehavior() {
+        const { scene, rotateSpeed } = this;
+        const time = scene.gameTime;
+        this.attackEndTime = time + this.attackIntervalTime;
+        this.currentRotateSpeed = rotateSpeed;
+        this.attackHunting = true;
+        this.behavior = Behavior.attack;
+    }
+    setStopEndTime(init = false) {
+        const { scene, stopIntervalTime, stopIntervalRangeTime } = this;
+        const time = scene.gameTime;
+        if (init) {
+            this.stopEndTime = time + 1000 + helpers_1.getRandomInt(0, stopIntervalTime);
+        }
+        else {
+            this.stopEndTime = time + stopIntervalTime + helpers_1.getRandomInt(0, stopIntervalRangeTime);
+        }
+    }
+    setMovingBehavior() {
+        const { scene, changeTargetInterval, shootIntervalTime } = this;
+        const time = scene.gameTime;
+        this.setStopEndTime();
+        this.lastChangeTargetTime = time + changeTargetInterval;
+        this.lastShootTime = time + shootIntervalTime;
+        this.behavior = Behavior.moving;
+    }
+    setRotateBehavior() {
+        const { scene, rotateIntervalTimer, rotateSpeed } = this;
+        const time = scene.gameTime;
+        this.speed = 0;
+        this.rotateTimer = time + rotateIntervalTimer;
+        this.currentRotateSpeed = rotateSpeed + 1;
+        this.behavior = Behavior.rotate;
+    }
+    shoot(radians, spreadRange = 0) {
+        const { body, bulletSpeed, weaponDamage } = this;
+        const angle = helpers_1.spreadRadians(radians, spreadRange);
+        this.scene.bullets.push(new bullets_1.SphereBullet(this.scene, new components_1.Vector(body.x, body.y), types_1.Owner.enemy, {
+            speed: helpers_1.getOffsetToAngle(angle, bulletSpeed),
+            angle,
+            sprite: "laser-red",
+            explodeSprite: "red-explode",
+            damage: weaponDamage,
+        }));
+    }
+    destroy() {
+        const { scene, body } = this;
+        scene.utils.tripleExplode(body.x, body.y);
+        super.destroy();
+    }
+}
+exports.Hunter = Hunter;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UFO = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const helpers_1 = __webpack_require__(3);
+const types_1 = __webpack_require__(1);
+const Enemy_1 = __webpack_require__(6);
+const bullets_1 = __webpack_require__(7);
+var Behavior;
+(function (Behavior) {
+    Behavior["moving"] = "moving";
+    Behavior["stop"] = "stop";
+    Behavior["attack"] = "attack";
+})(Behavior || (Behavior = {}));
+class UFO extends Enemy_1.Enemy {
+    constructor(scene, params) {
+        super(scene, types_1.EnemyName.ufo);
+        // shooting
+        this.weaponDamage = 10;
+        this.chanceToShoot = 0.25;
+        this.lastShootTime = 0;
+        this.shootIntervalTime = 1200;
+        // attack
+        this.attackEndTime = 0;
+        this.attackIntervalTime = 1000;
+        // direction
+        this.lastChangeTargetTime = 0;
+        this.changeTargetInterval = 1000;
+        this.changeTargetIntervalRange = 2000;
+        this.rotateSpeed = 0.5;
+        // speed
+        this.maxSpeed = 1;
+        this.speed = 1;
+        this.speedIncrease = 0.02;
+        this.stopEndTime = 0;
+        this.stopIntervalTime = 1500;
+        this.stopIntervalRangeTime = 2500;
+        // base
+        this.coinChance = 0.9;
+        this.bodySize = 36;
+        this.depth = 50;
+        this.scale = 0.7;
+        this.hp = 70;
+        this.bulletSpeed = 7;
+        this.behavior = Behavior.moving;
+        this.body = scene.physics.add.image(params.x, params.y, "enemy-ufo");
+        this.init();
+        this.defineTarget = this.defineTarget.bind(this);
+        this.defineTarget();
+    }
+    init() {
+        const { scale, depth, body, bodySize } = this;
+        body.setScale(scale);
+        body.setImmovable(true);
+        body.setDepth(depth);
+        const centerPos = helpers_1.getCenterBody(body.displayWidth, body.displayHeight, scale, bodySize);
+        body.setCircle(bodySize, centerPos.x, centerPos.y);
+        this.setStopEndTime(true);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(_, delta) {
+        const { scene, body, lastShootTime, shootIntervalTime, chanceToShoot, behavior, speedIncrease, changeTargetInterval, changeTargetIntervalRange, stopEndTime, } = this;
+        const playerBody = scene.player.body;
+        const time = scene.gameTime;
+        this.updateBase(time, delta);
+        switch (behavior) {
+            case Behavior.moving: {
+                if (this.speed < this.maxSpeed) {
+                    this.speed += speedIncrease;
+                }
+                if (time > lastShootTime) {
+                    if (Math.random() > 1 - chanceToShoot) {
+                        this.shoot(helpers_1.getAngleBetween(new components_1.Vector(playerBody.x, playerBody.y), new components_1.Vector(body.x, body.y)), false);
+                    }
+                    this.lastShootTime = time + shootIntervalTime;
+                }
+                if (time > this.lastChangeTargetTime) {
+                    this.defineTarget();
+                    const intervalTime = changeTargetInterval + Math.random() * changeTargetIntervalRange;
+                    this.lastChangeTargetTime = time + intervalTime;
+                }
+                if (time > stopEndTime && !this.isOutsideScene()) {
+                    this.behavior = Behavior.stop;
+                }
+                break;
+            }
+            case Behavior.stop: {
+                if (this.speed > 0) {
+                    this.speed -= speedIncrease;
+                }
+                else {
+                    this.attackEndTime = time + this.attackIntervalTime;
+                    this.behavior = Behavior.attack;
+                }
+                break;
+            }
+            case Behavior.attack: {
+                if (time > this.attackEndTime) {
+                    this.circleAttack();
+                    this.setMovingBehavior();
+                }
+                break;
+            }
+        }
+    }
+    updateBase(time, delta) {
+        const { body, angle, targetAngle, rotateSpeed } = this;
+        this.body.angle += this.speed;
+        const angleInRadians = helpers_1.angleToRadians(angle);
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        body.x += this.speed * Math.cos(angleInRadians) * deltaSpeed;
+        body.y += this.speed * Math.sin(angleInRadians) * deltaSpeed;
+        this.angle = helpers_1.getNearestAngle(angle, targetAngle, rotateSpeed);
+        if (body.x < 100 || body.y < 100 || body.x > config_1.CONFIG.width - 100 || body.y > config_1.CONFIG.height - 100) {
+            // need fix
+            this.setTarget(new components_1.Vector(config_1.CONFIG.width / 2, config_1.CONFIG.height / 2));
+        }
+    }
+    defineTarget() {
+        const target = new components_1.Vector(Math.random() * config_1.CONFIG.width, Math.random() * config_1.CONFIG.height);
+        this.setTarget(target);
+    }
+    setTarget(target) {
+        const { body } = this;
+        this.targetPos = target;
+        this.targetAngle = helpers_1.angleToDegrees(helpers_1.getAngleBetween(this.targetPos, body));
+    }
+    setStopEndTime(init = false) {
+        const { scene, stopIntervalTime, stopIntervalRangeTime } = this;
+        const time = scene.gameTime;
+        this.stopEndTime = time + stopIntervalTime + helpers_1.getRandomInt(0, stopIntervalRangeTime);
+    }
+    setMovingBehavior() {
+        const { scene, changeTargetInterval, shootIntervalTime } = this;
+        const time = scene.gameTime;
+        this.setStopEndTime();
+        this.lastChangeTargetTime = time + changeTargetInterval;
+        this.lastShootTime = time + shootIntervalTime;
+        this.behavior = Behavior.moving;
+    }
+    circleAttack() {
+        const angle = 360 / 8;
+        const offset = Math.random() * angle;
+        for (let i = 0; i < 8; i++) {
+            this.shoot(helpers_1.angleToRadians(offset + i * angle), true);
+        }
+    }
+    shoot(radians, isSphere = true) {
+        const { body, bulletSpeed, weaponDamage } = this;
+        this.scene.bullets.push(new bullets_1.SphereBullet(this.scene, new components_1.Vector(body.x, body.y), types_1.Owner.enemy, {
+            speed: helpers_1.getOffsetToAngle(radians, bulletSpeed),
+            angle: radians,
+            sprite: isSphere ? "sphere-bullet" : "laser-red",
+            explodeSprite: "red-explode",
+            damage: weaponDamage,
+            scale: isSphere ? 0.35 : 1,
+            bodySize: isSphere ? 32 : 12,
+        }));
+    }
+    destroy() {
+        const { scene, body } = this;
+        scene.utils.tripleExplode(body.x, body.y);
+        this.circleAttack();
+        super.destroy();
+    }
+}
+exports.UFO = UFO;
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Flyer = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const helpers_1 = __webpack_require__(3);
+const effects_1 = __webpack_require__(15);
+const types_1 = __webpack_require__(1);
+const Enemy_1 = __webpack_require__(6);
+const bullets_1 = __webpack_require__(7);
+class Flyer extends Enemy_1.Enemy {
+    constructor(scene, params) {
+        super(scene, types_1.EnemyName.flyer);
+        // move
+        this.maxSpeed = 4;
+        this.minSpeed = 1;
+        this.speed = 2;
+        this.speedChange = 0.1;
+        this.rotateSpeed = 2;
+        // attack
+        this.bulletSpeed = 7;
+        this.lastShootTime = 0;
+        this.shootTime = 1200;
+        this.shootTimeInterval = 200;
+        this.weaponDamage = 10;
+        // shadow
+        this.lastShadowTime = 0;
+        this.shadowTime = 50;
+        // base
+        this.hp = 50;
+        this.coinChance = 0.9;
+        this.bodySize = 32;
+        this.depth = 50;
+        this.scale = 0.6;
+        this.body = scene.physics.add.image(params.x, params.y, "enemy-flyer");
+        this.init();
+        this.defineRandomTargetPoint = this.defineRandomTargetPoint.bind(this);
+        this.defineRandomTargetPoint();
+    }
+    init() {
+        const { scale, depth, body, bodySize } = this;
+        body.setScale(scale);
+        body.setImmovable(true);
+        body.setDepth(depth);
+        const centerPos = helpers_1.getCenterBody(body.displayWidth, body.displayHeight, scale, bodySize);
+        body.setCircle(bodySize, centerPos.x, centerPos.y);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        this.updateWorldCollisions(time, delta);
+        this.updateBase(time, delta);
+        this.updateMovement(time, delta);
+        this.updateAttack(time, delta);
+        this.updateShadows();
+    }
+    updateBase(time, delta) {
+        const { body, angle, targetAngle, rotateSpeed } = this;
+        this.body.angle = angle - 90;
+        const angleInRadians = helpers_1.angleToRadians(angle);
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        body.x += this.speed * Math.cos(angleInRadians) * deltaSpeed;
+        body.y += this.speed * Math.sin(angleInRadians) * deltaSpeed;
+        this.angle = helpers_1.getNearestAngle(angle, targetAngle, rotateSpeed);
+    }
+    updateMovement(time, delta) {
+        const { speedChange, angle, targetAngle } = this;
+        if (helpers_1.getAngleDiff(angle, targetAngle) < 3) {
+            if (this.speed < this.maxSpeed) {
+                this.speed += speedChange;
+            }
+        }
+        else {
+            if (this.speed > this.minSpeed) {
+                this.speed -= speedChange;
+            }
+        }
+    }
+    updateAttack(time, delta) {
+        const { scene, body, shootTime, shootTimeInterval } = this;
+        const gameTime = scene.gameTime;
+        if (gameTime > this.lastShootTime) {
+            const playerBody = scene.player.body;
+            const playerPos = new components_1.Vector(playerBody.x, playerBody.y);
+            const angleToPlayer = helpers_1.getAngleBetween(playerPos, new components_1.Vector(body.x, body.y));
+            if (Math.random() > 0.1) {
+                const spreadRange = 0.25 + Math.random() * 0.3;
+                this.shoot(angleToPlayer + spreadRange);
+                this.shoot(angleToPlayer - spreadRange);
+            }
+            else {
+                this.shoot(angleToPlayer);
+            }
+            this.lastShootTime = gameTime + shootTime + Math.random() * shootTimeInterval;
+        }
+    }
+    updateShadows() {
+        const { scene, lastShadowTime, shadowTime } = this;
+        const gameTime = scene.gameTime;
+        if (gameTime > lastShadowTime) {
+            this.lastShadowTime = gameTime + shadowTime;
+            this.createShadow();
+        }
+    }
+    createShadow() {
+        const { scene, body, scale, angle } = this;
+        const speedTime = Math.max(this.maxSpeed - this.speed, 0) * 0.25;
+        scene.effects.push(new effects_1.Shadow(scene, new components_1.Vector(body.x, body.y), {
+            sprite: "enemy-flyer",
+            lifeTime: 250,
+            scale,
+            angle: angle - 90,
+            alpha: 0.4 - speedTime,
+        }));
+    }
+    defineRandomTargetPoint() {
+        const target = new components_1.Vector(Math.random() * config_1.CONFIG.width, Math.random() * config_1.CONFIG.height);
+        this.setTarget(target);
+    }
+    setTarget(target) {
+        this.targetAngle = helpers_1.angleToDegrees(helpers_1.getAngleBetween(target, this.body));
+    }
+    shoot(angle) {
+        const { body, bulletSpeed, weaponDamage } = this;
+        this.scene.bullets.push(new bullets_1.SphereBullet(this.scene, new components_1.Vector(body.x, body.y), types_1.Owner.enemy, {
+            speed: helpers_1.getOffsetToAngle(angle, bulletSpeed),
+            angle,
+            sprite: "laser-red",
+            explodeSprite: "red-explode",
+            damage: weaponDamage,
+        }));
+    }
+    onOutOfWorld(nextTarget) {
+        this.setTarget(nextTarget);
+    }
+    destroy() {
+        const { scene, body } = this;
+        scene.utils.tripleExplode(body.x, body.y);
+        super.destroy();
+    }
+}
+exports.Flyer = Flyer;
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getLevelConfig = void 0;
+const enemies_1 = __webpack_require__(19);
+const types_1 = __webpack_require__(1);
+const helpers_1 = __webpack_require__(3);
+const getMissionText = (levelMode) => {
+    switch (levelMode.type) {
+        case types_1.GameMode.totalKills: {
+            const targetCount = levelMode.target;
+            return `Mission: kill ${targetCount} ${helpers_1.pluralize(targetCount, ["invader", "invaders", "invaders"])}`;
+        }
+        case types_1.GameMode.enemyKills: {
+            const targets = levelMode.target;
+            const text = Object.keys(targets)
+                .map((targetName) => {
+                const targetCount = targets[targetName];
+                return `${targetCount} ${helpers_1.pluralize(targetCount, enemies_1.ENEMIES_CONFIG[targetName].pluralName)}`;
+            })
+                .join(" / ");
+            return `Mission: kill ${text}`;
+        }
+        case types_1.GameMode.time: {
+            const seconds = levelMode.target;
+            return `Mission: stay alive for ${seconds} ${helpers_1.pluralize(seconds, ["second", "seconds", "seconds"])}`;
+        }
+        case types_1.GameMode.waves: {
+            const wavesCount = levelMode.target.length;
+            return `Mission: Defeat ${wavesCount} waves of enemies`;
+        }
+    }
+};
+const getLevelConfig = (levelConfig) => (Object.assign(Object.assign({}, levelConfig), { mission: getMissionText(levelConfig.mode) }));
+exports.getLevelConfig = getLevelConfig;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameScene = void 0;
+var Game_1 = __webpack_require__(38);
+Object.defineProperty(exports, "GameScene", { enumerable: true, get: function () { return Game_1.GameScene; } });
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameScene = void 0;
+const config_1 = __webpack_require__(0);
+const services_1 = __webpack_require__(39);
+const Scene_1 = __webpack_require__(9);
+const Player_1 = __webpack_require__(57);
+const types_1 = __webpack_require__(1);
+const preload_1 = __webpack_require__(58);
+const Utils_1 = __webpack_require__(59);
+const helpers_1 = __webpack_require__(62);
+let graphics;
+class GameScene extends Scene_1.Scene {
+    constructor() {
+        super({
+            key: types_1.SceneName.game,
+        });
+        this.enemies = [];
+        this.bullets = [];
+        this.effects = [];
+        this.bonuses = [];
+        this.score = 0;
+        this.services = [];
+        this.stats = helpers_1.getInitialGameData();
+        this.isWon = false;
+        this.isFail = false;
+        this.gameTime = 0;
+    }
+    preload() { }
+    init(params) {
+        this.params = params;
+    }
+    create() {
+        this.resetState();
+        this.physics.world.setBounds(0, 0, config_1.CONFIG.width, config_1.CONFIG.height);
+        // this.add.tileSprite(CONFIG.width / 2, CONFIG.height / 2, CONFIG.width, CONFIG.height, "background");
+        this.background = this.add.image(0, 0, "background").setOrigin(0, 0).setAlpha(0.2);
+        graphics = this.add.graphics({
+            lineStyle: { width: 2, color: 0x00ff00 },
+            fillStyle: { color: 0xff0000 },
+        });
+        this.player = new Player_1.Player(this);
+        this.utils = new Utils_1.Utils(this);
+        this.initListeners();
+        this.initServices();
+        this.initTimer();
+        this.shakeCamera = this.cameras.add(0, 0, config_1.CONFIG.width, config_1.CONFIG.height);
+    }
+    initTimer() {
+        this.time.addEvent({ delay: 10, callback: this.onClockEvent, callbackScope: this, loop: true });
+    }
+    onClockEvent() {
+        this.gameTime += 15;
+    }
+    initListeners() {
+        const keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        keyM.on("down", () => {
+            if (this.player.body.active) {
+                this.scene.start(types_1.SceneName.menu);
+            }
+        });
+    }
+    initServices() {
+        // P.S interesting generic type detection
+        this.addService(services_1.StarsService, { count: 20 }); // ok 200ms
+        this.addService(services_1.MeteorsService, {}); // ok 300ms
+        // this.addService(LoggerService, {}); // ok 170ms
+        this.addService(services_1.InterfaceService, {});
+        this.addService(services_1.LevelService, {});
+        this.addService(services_1.CometsService, {});
+    }
+    addService(ServiceConstructor, params) {
+        this.services.push(new ServiceConstructor(this, params));
+    }
+    update(time, delta) {
+        graphics.clear();
+        this.enemies.forEach((enemy) => {
+            enemy.act(time, delta);
+        });
+        this.bullets.forEach((bullet) => {
+            bullet.act(time, delta);
+        });
+        this.effects.forEach((effect) => {
+            effect.act();
+        });
+        this.services.forEach((service) => {
+            service.act(time, delta);
+        });
+        this.bonuses.forEach((bonus) => {
+            bonus.act();
+        });
+        this.player.act(time, delta);
+    }
+    resetState() {
+        this.bullets = [];
+        this.enemies = [];
+        this.effects = [];
+        this.bonuses = [];
+        this.score = 0;
+        this.text = "";
+        this.services = [];
+        this.stats = helpers_1.getInitialGameData();
+        this.isWon = false;
+        this.isFail = false;
+        this.gameTime = 0;
+    }
+    onFail() {
+        this.isFail = true;
+        setTimeout(() => {
+            this.scene.start(types_1.SceneName.fail);
+        }, config_1.CONFIG.scene.failTimeoutTime);
+    }
+    onWin() {
+        if (!this.isWon && !this.isFail) {
+            this.isWon = true;
+            setTimeout(() => {
+                if (!this.isFail) {
+                    this.scene.start(types_1.SceneName.win, {
+                        score: this.score,
+                        isFlawlessVictory: this.player.hp === this.player.maxHp,
+                    });
+                }
+            }, config_1.CONFIG.scene.winTimeoutTime);
+        }
+    }
+    shakeScreen() {
+        this.shakeCamera.shake(500, 0.003);
+    }
+    getStats() {
+        return this.stats;
+    }
+}
+exports.GameScene = GameScene;
+GameScene.prototype.preload = preload_1.preload;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Service = exports.CometsService = exports.LevelService = exports.InterfaceService = exports.LoggerService = exports.MeteorsService = exports.StarsService = void 0;
+var StarsService_1 = __webpack_require__(40);
+Object.defineProperty(exports, "StarsService", { enumerable: true, get: function () { return StarsService_1.StarsService; } });
+var MeteorsService_1 = __webpack_require__(42);
+Object.defineProperty(exports, "MeteorsService", { enumerable: true, get: function () { return MeteorsService_1.MeteorsService; } });
+var LoggerService_1 = __webpack_require__(44);
+Object.defineProperty(exports, "LoggerService", { enumerable: true, get: function () { return LoggerService_1.LoggerService; } });
+var InterfaceService_1 = __webpack_require__(45);
+Object.defineProperty(exports, "InterfaceService", { enumerable: true, get: function () { return InterfaceService_1.InterfaceService; } });
+var LevelService_1 = __webpack_require__(49);
+Object.defineProperty(exports, "LevelService", { enumerable: true, get: function () { return LevelService_1.LevelService; } });
+var CometsService_1 = __webpack_require__(55);
+Object.defineProperty(exports, "CometsService", { enumerable: true, get: function () { return CometsService_1.CometsService; } });
+var Service_1 = __webpack_require__(4);
+Object.defineProperty(exports, "Service", { enumerable: true, get: function () { return Service_1.Service; } });
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StarsService = void 0;
+const Star_1 = __webpack_require__(41);
+const Service_1 = __webpack_require__(4);
+class StarsService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.stars = [];
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene } = this;
+        const { count } = this.params;
+        for (let i = 0; i < count; i++) {
+            this.stars.push(new Star_1.Star(scene, {
+                initialAlphaCoef: i * 500,
+            }));
+        }
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        this.stars.forEach((star) => {
+            star.act(time, delta);
+        });
+    }
+}
+exports.StarsService = StarsService;
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Star = void 0;
+const config_1 = __webpack_require__(0);
+class Star {
+    constructor(scene, params) {
+        this.scene = scene;
+        this.body = scene.add.sprite(Math.random() * config_1.CONFIG.width, Math.random() * config_1.CONFIG.height, "star");
+        this.initialCoef = params.initialAlphaCoef;
+        this.body.setDepth(0);
+        this.body.setScale(0.25 + Math.random() * 0.25);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        const { scene, body, initialCoef, lastRelocationTime } = this;
+        const gameTime = scene.gameTime;
+        body.angle += 4;
+        body.alpha = Math.sin((gameTime + initialCoef) / 1500);
+        if (gameTime > lastRelocationTime && body.alpha <= 0.5) {
+            body.x = Math.random() * config_1.CONFIG.width;
+            body.y = Math.random() * config_1.CONFIG.height;
+            this.lastRelocationTime = gameTime + 1000;
+        }
+    }
+}
+exports.Star = Star;
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MeteorsService = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const Meteor_1 = __webpack_require__(43);
+const angle_1 = __webpack_require__(14);
+const helpers_1 = __webpack_require__(3);
+const Service_1 = __webpack_require__(4);
+class MeteorsService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.meteors = [];
+        this.meteorIntervalTime = 1000;
+        this.meteorIntervalTimeRange = 1000;
+        this.lastMeteorTime = 0;
+        this.maxCount = 25;
+        this.params = params;
+        this.init();
+    }
+    init() {
+        for (let i = 0; i < helpers_1.getRandomInt(5, 8); i++) {
+            this.spawnMeteor({
+                outside: false,
+            });
+        }
+        for (let i = 0; i < helpers_1.getRandomInt(3, 5); i++) {
+            this.spawnMeteor({
+                outside: true,
+            });
+        }
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        const { scene, maxCount } = this;
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        const gameTime = scene.gameTime;
+        if (gameTime > this.lastMeteorTime && this.meteors.length < maxCount) {
+            this.spawnMeteor({
+                outside: true,
+            });
+        }
+        this.meteors.forEach((meteor) => {
+            const { body, speed } = meteor;
+            body.angle += speed.x * 0.5 * deltaSpeed;
+            body.x += speed.x * deltaSpeed;
+            body.y += speed.y * deltaSpeed;
+            if (body.x > config_1.CONFIG.width + 200 || body.y > config_1.CONFIG.height + 200) {
+                this.meteors = this.meteors.filter((m) => m !== meteor);
+                body.destroy();
+            }
+        });
+    }
+    spawnMeteor({ outside }) {
+        const { scene } = this;
+        const time = scene.gameTime;
+        const { meteorIntervalTime, meteorIntervalTimeRange } = this;
+        const scale = 0.5 + Math.random() * 1;
+        const startOffset = 200;
+        const angle = angle_1.angleToRadians(45);
+        const speedValue = 0.25 + Math.random() * 2.5;
+        const speed = new components_1.Vector(speedValue * Math.cos(angle), speedValue * Math.sin(angle));
+        const axis = Math.random() > 0.5 ? "x" : "y";
+        const spawnPoint = outside
+            ? {
+                x: axis === "x" ? -startOffset + Math.random() * (config_1.CONFIG.width * 0.75) : -startOffset,
+                y: axis === "y" ? -startOffset + Math.random() * (config_1.CONFIG.height * 0.75) : -startOffset,
+            }
+            : {
+                x: config_1.CONFIG.width * Math.random(),
+                y: config_1.CONFIG.height * Math.random(),
+            };
+        this.meteors.push(new Meteor_1.Meteor(scene, spawnPoint, speed, {
+            spriteIndex: 1 + Math.floor(Math.random() * 4),
+            alpha: 0.25 + Math.random() * 0.4,
+            scale,
+        }));
+        this.lastMeteorTime = Math.random() * meteorIntervalTimeRange + time + meteorIntervalTime * scale;
+    }
+}
+exports.MeteorsService = MeteorsService;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Meteor = void 0;
+class Meteor {
+    constructor(scene, pos, speed, params) {
+        this.scene = scene;
+        this.body = scene.add.sprite(pos.x, pos.y, `meteor-${params.spriteIndex}`);
+        this.speed = speed;
+        this.body.setAlpha(params.alpha);
+        this.body.setDepth(5);
+        this.body.setScale(params.scale, params.scale);
+    }
+}
+exports.Meteor = Meteor;
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoggerService = void 0;
+const Service_1 = __webpack_require__(4);
+class LoggerService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.lastLogTime = 0;
+        this.params = params;
+        this.init();
+    }
+    init() {
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const scene = this.scene;
+        const time = scene.gameTime;
+        if (time > this.lastLogTime) {
+            console.group("Stats");
+            console.log(`effects: ${scene.effects.length}`);
+            console.log(`enemies: ${scene.enemies.length}`);
+            console.log(`bullets: ${scene.bullets.length}`);
+            console.groupEnd();
+            this.lastLogTime = time + 2000;
+        }
+    }
+}
+exports.LoggerService = LoggerService;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.InterfaceService = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const colors_1 = __webpack_require__(5);
+const ui_1 = __webpack_require__(8);
+const Service_1 = __webpack_require__(4);
+const HEALTHBAR_WIDTH = 200;
+const GRAPHICS_DEPTH = 500;
+class InterfaceService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.backgroundInitialAlpha = 0;
+        this.backgroundChangeTime = 15000;
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene } = this;
+        const moneyStartPosX = HEALTHBAR_WIDTH + 15;
+        const textPosY = 27;
+        this.graphics = scene.add.graphics({
+            lineStyle: { width: 2, color: 0x00ff00 },
+            fillStyle: { color: 0xff0000 },
+        });
+        this.counterText = scene.add
+            .bitmapText(config_1.CONFIG.width - 17, textPosY, "atari", "0", 24)
+            .setOrigin(1, 0.5)
+            .setDepth(GRAPHICS_DEPTH);
+        this.scoreText = new ui_1.UICosmons(scene, {
+            pos: new components_1.Vector(moneyStartPosX + 28, textPosY),
+            value: 0,
+            isCentered: false,
+            depth: 100,
+        });
+        this.playerHealthbar = new Phaser.Geom.Rectangle(20, 24, config_1.CONFIG.width, 11);
+        this.graphics.setDepth(GRAPHICS_DEPTH);
+        this.backgroundInitialAlpha = Math.random() * (this.backgroundChangeTime * 5);
+    }
+    act() {
+        this.draw();
+        this.update();
+    }
+    draw() {
+        this.drawHealthbar();
+        this.drawScore();
+    }
+    update() {
+        const { scene, backgroundInitialAlpha, backgroundChangeTime } = this;
+        const alpha = (1 + Math.sin((backgroundInitialAlpha + scene.gameTime) / backgroundChangeTime)) * 0.25;
+        scene.background.setAlpha(alpha);
+    }
+    drawHealthbar() {
+        const { graphics, scene, playerHealthbar } = this;
+        const { player } = scene;
+        graphics.clear();
+        graphics.fillStyle(colors_1.COLORS.red);
+        playerHealthbar.width = HEALTHBAR_WIDTH;
+        graphics.fillRectShape(playerHealthbar);
+        graphics.fillStyle(colors_1.COLORS.green);
+        playerHealthbar.width = Math.max(HEALTHBAR_WIDTH * (player.hp / player.maxHp), 0);
+        graphics.fillRectShape(playerHealthbar);
+        graphics.lineStyle(2, colors_1.COLORS.white);
+        playerHealthbar.width = HEALTHBAR_WIDTH;
+        graphics.strokeRectShape(playerHealthbar);
+    }
+    drawScore() {
+        const { scene, counterText, scoreText } = this;
+        counterText.setText(scene.text);
+        scoreText.updateValue(scene.score);
+    }
+}
+exports.InterfaceService = InterfaceService;
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIButton = void 0;
+const colors_1 = __webpack_require__(5);
+class UIButton extends Phaser.GameObjects.Image {
+    constructor(scene, x, y, texture, params) {
+        super(scene, x, y, texture);
+        this.graphics = scene.add.graphics({
+            lineStyle: { width: 2, color: colors_1.COLORS.white },
+            fillStyle: { color: colors_1.COLORS.white },
+        });
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene, graphics, x, y } = this;
+        const { width, height, text, disabled } = this.params;
+        this.width = width;
+        this.height = height;
+        this.setOrigin(0.5, 0);
+        const alpha = disabled ? 0.5 : 1;
+        if (!disabled) {
+            this.setInteractive({ cursor: "pointer" });
+        }
+        else {
+            graphics.alpha = alpha;
+        }
+        const rect = new Phaser.Geom.Rectangle(x - width / 2, y, width, height);
+        graphics.strokeRectShape(rect);
+        const buttonText = scene.add
+            .bitmapText(x, y + Math.floor(height / 2), "atari", "", 16)
+            .setOrigin(0.5)
+            .setAlpha(alpha)
+            .setCenterAlign();
+        buttonText.setText(text);
+        this.on("pointerover", () => {
+            graphics.alpha = alpha;
+            graphics.lineStyle(2, colors_1.COLORS.green);
+            buttonText.tint = colors_1.COLORS.green;
+            document.body.style.cursor = "pointer";
+            graphics.strokeRectShape(rect);
+        });
+        this.on("pointerout", () => {
+            graphics.alpha = alpha;
+            graphics.lineStyle(2, colors_1.COLORS.white);
+            buttonText.tint = colors_1.COLORS.white;
+            document.body.style.cursor = "default";
+            graphics.strokeRectShape(rect);
+        });
+        this.on("pointerdown", () => {
+            document.body.style.cursor = "default";
+        });
+    }
+}
+exports.UIButton = UIButton;
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UICosmons = void 0;
+const Component_1 = __webpack_require__(20);
+const VALUES_OFFSET_X = 12;
+const VALUES_OFFSET_Y = 4;
+class UICosmons extends Component_1.UIComponent {
+    constructor(scene, params) {
+        super(scene);
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene, params } = this;
+        const { pos, value, isCentered, depth, prefix } = params;
+        const valueTextOffset = prefix ? 12 : 0;
+        const starImage = scene.add.image(pos.x, pos.y, "coin-gold").setOrigin(0, 0.5).setDepth(depth);
+        const prefixBitmapText = new Phaser.GameObjects.BitmapText(scene, pos.x + starImage.width + VALUES_OFFSET_X - 4, pos.y + VALUES_OFFSET_Y + 1, "atari", prefix, 22)
+            .setOrigin(0, 0.5)
+            .setDepth(depth);
+        if (prefix) {
+            scene.add.existing(prefixBitmapText);
+        }
+        this.valueText = scene.add
+            .bitmapText(pos.x + starImage.width + VALUES_OFFSET_X + valueTextOffset, pos.y + VALUES_OFFSET_Y, "atari", value.toString(), 22)
+            .setOrigin(0, 0.5)
+            .setDepth(depth);
+        if (isCentered) {
+            const halfComponentWidth = (starImage.width + VALUES_OFFSET_X + this.valueText.width + valueTextOffset) / 2;
+            starImage.x -= halfComponentWidth;
+            this.valueText.x -= halfComponentWidth;
+            prefixBitmapText.x -= halfComponentWidth;
+        }
+    }
+    updateValue(value) {
+        this.valueText.setText(value.toString());
+    }
+}
+exports.UICosmons = UICosmons;
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIRainbowText = void 0;
+const colors_1 = __webpack_require__(5);
+const Component_1 = __webpack_require__(20);
+const DEFAULT_PARAMS = {
+    fontSize: 23,
+    color: colors_1.COLORS.green,
+};
+class UIRainbowText extends Component_1.UIComponent {
+    constructor(scene, params) {
+        super(scene);
+        this.rainbowColorIdx = 0;
+        this.rainbowColorOffset = 0;
+        this.delay = 0;
+        this.rainbowWave = 0;
+        this.params = Object.assign(Object.assign({}, DEFAULT_PARAMS), params);
+        this.init();
+    }
+    init() {
+        const { scene } = this;
+        const { text, pos, color } = this.params;
+        this.rainbowCallback = this.rainbowCallback.bind(this);
+        const rainbowText = scene.add
+            .dynamicBitmapText(pos.x, pos.y, "atari", text, 23)
+            .setOrigin(0.5)
+            .setCenterAlign();
+        rainbowText.setDisplayCallback(this.rainbowCallback);
+        rainbowText.tint = color;
+    }
+    update() {
+        this.updateRainbow();
+    }
+    updateRainbow() {
+        this.rainbowColorIdx = 0;
+        if (this.delay++ === 6) {
+            this.rainbowColorOffset = (this.rainbowColorOffset + 1) % 4;
+            this.delay = 0;
+        }
+    }
+    rainbowCallback(data) {
+        const { color } = this.params;
+        data.color = color;
+        this.rainbowColorIdx = (this.rainbowColorIdx + 1) % 4;
+        data.y = Math.cos(this.rainbowWave + this.rainbowColorIdx) * 2;
+        this.rainbowWave += 0.005;
+        return data;
+    }
+}
+exports.UIRainbowText = UIRainbowText;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LevelService = void 0;
+const levels_1 = __webpack_require__(50);
+const Service_1 = __webpack_require__(4);
+class LevelService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene } = this;
+        const currentLevelNumber = scene.params.level;
+        this.currentLevel = new levels_1.levels[currentLevelNumber](scene);
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const { scene, currentLevel } = this;
+        const isWin = currentLevel.checkForWin();
+        scene.text = currentLevel.getTextByMode();
+        currentLevel.update();
+        if (isWin) {
+            scene.onWin();
+        }
+    }
+}
+exports.LevelService = LevelService;
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.levels = void 0;
+const Level1_1 = __webpack_require__(51);
+const Level2_1 = __webpack_require__(52);
+const Level3_1 = __webpack_require__(53);
+const Level4_1 = __webpack_require__(54);
+exports.levels = [Level1_1.Level1, Level2_1.Level2, Level3_1.Level3, Level4_1.Level4];
+/*
+1. 3-5 easy
+2. 2-4 easy 0-2 medium
+3. 2-4 easy 2+ medium
+4.
+*/ 
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Level1 = void 0;
+const enemies_1 = __webpack_require__(10);
+const Level_1 = __webpack_require__(12);
+const MAX_ENEMIES_COUNT = 5;
+const CHANCE_TO_MAX_COUNT = 0.8;
+const COUNT_FOR_INCREMENT_MAX = 0.66;
+class Level1 extends Level_1.Level {
+    constructor(scene) {
+        super(scene);
+        this.nextAttemptTimeInterval = 1500;
+    }
+    makeAttempt() {
+        const { scene } = this;
+        const { enemies } = scene;
+        const stats = scene.getStats();
+        const mode = this.mode;
+        const maxCount = stats.totalKills > Math.ceil(mode.target * COUNT_FOR_INCREMENT_MAX)
+            ? MAX_ENEMIES_COUNT
+            : MAX_ENEMIES_COUNT - 1;
+        if (enemies.length < MAX_ENEMIES_COUNT - 2) {
+            this.createEnemy(enemies_1.Bot);
+        }
+        else if (enemies.length < maxCount) {
+            if (Math.random() > CHANCE_TO_MAX_COUNT) {
+                this.createEnemy(enemies_1.Bot);
+            }
+        }
+    }
+}
+exports.Level1 = Level1;
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Level2 = void 0;
+const enemies_1 = __webpack_require__(10);
+const types_1 = __webpack_require__(1);
+const Level_1 = __webpack_require__(12);
+const MAX_ENEMIES_COUNT = 4;
+class Level2 extends Level_1.Level {
+    constructor(scene) {
+        super(scene);
+        this.nextAttemptTimeInterval = 1500;
+    }
+    makeAttempt() {
+        const { scene } = this;
+        const { enemies } = scene;
+        const stats = scene.getStats();
+        const mode = this.mode;
+        const chanceToMax = stats.kills.hunter > Math.ceil(mode.target.hunter / 2) ? 0.4 : 0;
+        if (enemies.length < MAX_ENEMIES_COUNT - 1) {
+            this.spawnEnemy();
+        }
+        else if (enemies.length < MAX_ENEMIES_COUNT) {
+            if (Math.random() > 0.75 - chanceToMax) {
+                this.spawnEnemy();
+            }
+        }
+    }
+    spawnEnemy() {
+        const { scene } = this;
+        const stats = scene.getStats();
+        const huntersAlive = scene.enemies.filter((e) => e.name === types_1.EnemyName.hunter).length;
+        const isHunter = Math.floor(stats.kills.bot / 3) > stats.kills.hunter + huntersAlive;
+        if ((Math.random() > 0.3 && !isHunter) || huntersAlive >= 2) {
+            this.createEnemy(enemies_1.Bot);
+        }
+        else {
+            this.createEnemy(enemies_1.Hunter);
+        }
+    }
+}
+exports.Level2 = Level2;
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Level3 = void 0;
+const enemies_1 = __webpack_require__(10);
+const types_1 = __webpack_require__(1);
+const Level_1 = __webpack_require__(12);
+const MAX_ENEMIES_COUNT = 4;
+class Level3 extends Level_1.Level {
+    constructor(scene) {
+        super(scene);
+        this.nextAttemptTimeInterval = 1500;
+        this.additionalTime = 0;
+        this.additionalTimeInterval = 10000;
+        this.additionalTime = scene.gameTime + this.additionalTimeInterval;
+    }
+    update() {
+        const { scene, additionalTime, additionalTimeInterval } = this;
+        const time = scene.gameTime;
+        if (time > additionalTime) {
+            this.spawnEnemy(true);
+            this.additionalTime = scene.gameTime + additionalTimeInterval;
+        }
+        super.update();
+    }
+    makeAttempt() {
+        const { scene } = this;
+        const { enemies } = scene;
+        if (enemies.length < MAX_ENEMIES_COUNT) {
+            this.spawnEnemy();
+        }
+    }
+    spawnEnemy(isAdditionalSpawn = false) {
+        const { scene } = this;
+        const rand = Math.random();
+        const huntersAliveCount = scene.enemies.filter((e) => e.name === types_1.EnemyName.hunter).length;
+        const ufoAliveCount = scene.enemies.filter((e) => e.name === types_1.EnemyName.ufo).length;
+        const totalHeavyEnemiesCount = huntersAliveCount + ufoAliveCount;
+        if (rand > 0.7 && (totalHeavyEnemiesCount < 2 || isAdditionalSpawn)) {
+            this.createEnemy(enemies_1.UFO);
+        }
+        else if (rand > 0.3 && (totalHeavyEnemiesCount < 2 || isAdditionalSpawn)) {
+            this.createEnemy(enemies_1.Hunter);
+        }
+        else {
+            this.createEnemy(enemies_1.Bot);
+        }
+    }
+}
+exports.Level3 = Level3;
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Level4 = void 0;
+const Level_1 = __webpack_require__(12);
+class Level4 extends Level_1.Level {
+    constructor(scene) {
+        super(scene);
+        this.nextAttemptTimeInterval = 1500;
+    }
+    update() {
+        super.update();
+    }
+}
+exports.Level4 = Level4;
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CometsService = void 0;
+const config_1 = __webpack_require__(0);
+const Comet_1 = __webpack_require__(56);
+const Service_1 = __webpack_require__(4);
+class CometsService extends Service_1.Service {
+    constructor(scene, params) {
+        super(scene);
+        this.comets = [];
+        this.count = 15;
+        this.params = params;
+        this.init();
+    }
+    init() {
+        const { scene, count } = this;
+        for (let i = 0; i < count; i++) {
+            this.comets.push(new Comet_1.Comet(scene, {}));
+        }
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        this.comets.forEach((comet) => {
+            const { body } = comet;
+            body.y += comet.speed * deltaSpeed;
+            if (body.y > config_1.CONFIG.height + 100) {
+                comet.updateParams();
+                comet.refreshPosition();
+            }
+        });
+    }
+}
+exports.CometsService = CometsService;
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Comet = void 0;
+const config_1 = __webpack_require__(0);
+const helpers_1 = __webpack_require__(3);
+class Comet {
+    constructor(scene, params) {
+        this.speed = 3;
+        this.scene = scene;
+        this.body = this.scene.add.image(helpers_1.getRandomInt(0, config_1.CONFIG.width), helpers_1.getRandomInt(0, config_1.CONFIG.height), "comet");
+        this.updateParams();
+    }
+    updateParams() {
+        const { body } = this;
+        body.setAlpha(0.03 + Math.random() * 0.1);
+        body.setScale(0.2, 0.75 + Math.random() * 0.5);
+        this.speed = helpers_1.getRandomInt(3, 7);
+    }
+    refreshPosition() {
+        const { body } = this;
+        body.x = helpers_1.getRandomInt(0, config_1.CONFIG.width);
+        body.y = -100;
+    }
+}
+exports.Comet = Comet;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Player = void 0;
+const config_1 = __webpack_require__(0);
+const components_1 = __webpack_require__(2);
+const types_1 = __webpack_require__(1);
+const helpers_1 = __webpack_require__(3);
+const bullets_1 = __webpack_require__(7);
+class Player {
+    constructor(scene) {
+        // config
+        this.scale = 0.6;
+        this.bodySize = 26;
+        this.speed = 5;
+        this.bulletSpeed = 10;
+        this.lastShootTime = 0;
+        this.shootTime = 320;
+        this.hp = 100;
+        this.maxHp = 100;
+        this.weaponDamage = 10;
+        this.angle = 0;
+        this.scene = scene;
+        this.body = this.scene.physics.add.image(300, 300, "player-ship");
+        this.lastShootTime = scene.gameTime + 100;
+        // this.laserSound = scene.sound.add("laser-2");
+        this.init();
+    }
+    init() {
+        const { scene, scale } = this;
+        this.body.setScale(scale);
+        this.body.setDepth(100);
+        this.body.setImmovable(true);
+        scene.add.existing(this.body);
+    }
+    act(time, delta) {
+        this.update(time, delta);
+    }
+    update(time, delta) {
+        if (!this.body.active)
+            return;
+        this.updateBody(time, delta);
+        this.updateShooting(time, delta);
+        this.updateMovement(time, delta);
+        this.updateAngle(time, delta);
+    }
+    updateBody(time, delta) {
+        const { scale, bodySize } = this;
+        const offset = helpers_1.getOffsetToAngle(this.angle + Math.PI, 10);
+        const pos = helpers_1.getCenterBody(this.body.displayWidth, this.body.displayHeight, scale, bodySize, offset);
+        this.body.setCircle(bodySize, pos.x, pos.y);
+    }
+    updateShooting(time, delta) {
+        const { scene } = this;
+        const pointer = scene.input.activePointer;
+        if (pointer.isDown) {
+            this.shoot(new components_1.Vector(pointer.x, pointer.y));
+        }
+    }
+    updateMovement(time, delta) {
+        const { scene, body } = this;
+        const cursorKeys = scene.input.keyboard.createCursorKeys();
+        const deltaSpeed = delta / config_1.CONFIG.scene.delta;
+        let spd = this.speed * deltaSpeed;
+        if ((cursorKeys.up.isDown || cursorKeys.down.isDown) && (cursorKeys.right.isDown || cursorKeys.left.isDown)) {
+            spd *= 0.8;
+        }
+        if (cursorKeys.up.isDown) {
+            body.y -= spd;
+        }
+        else if (cursorKeys.down.isDown) {
+            body.y += spd;
+        }
+        if (cursorKeys.right.isDown) {
+            body.x += spd;
+        }
+        else if (cursorKeys.left.isDown) {
+            body.x -= spd;
+        }
+        if (body.x < 0)
+            body.x = 0;
+        if (body.y < config_1.CONFIG.scene.minYPos)
+            body.y = config_1.CONFIG.scene.minYPos;
+        if (body.x > config_1.CONFIG.width) {
+            body.x = config_1.CONFIG.width;
+        }
+        if (body.y > config_1.CONFIG.height) {
+            body.y = config_1.CONFIG.height;
+        }
+    }
+    updateAngle(time, delta) {
+        const { scene, body } = this;
+        const pointer = scene.input.activePointer;
+        this.angle = helpers_1.getAngleBetween(new components_1.Vector(pointer.x, pointer.y), new components_1.Vector(body.x, body.y));
+        this.body.angle = helpers_1.angleToDegrees(this.angle) + 90;
+    }
+    shoot(target) {
+        const { scene, body, bulletSpeed, weaponDamage } = this;
+        const time = scene.gameTime;
+        if (time > this.lastShootTime) {
+            // this.laserSound.play();
+            const rotation = helpers_1.getAngleBetween(target, new components_1.Vector(body.x, body.y));
+            this.scene.bullets.push(new bullets_1.SphereBullet(this.scene, new components_1.Vector(body.x, body.y), types_1.Owner.player, {
+                speed: helpers_1.getOffsetToAngle(rotation, bulletSpeed),
+                angle: rotation,
+                sprite: "laser-green",
+                explodeSprite: "green-explode",
+                damage: weaponDamage,
+            }));
+            this.lastShootTime = time + this.shootTime;
+        }
+    }
+    damage(value) {
+        this.hp -= value;
+        if (this.hp <= 0) {
+            this.destroy();
+        }
+    }
+    destroy() {
+        const { scene, body } = this;
+        scene.utils.tripleExplode(body.x, body.y);
+        body.destroy();
+        scene.onFail();
+        scene.shakeScreen();
+    }
+}
+exports.Player = Player;
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.preload = void 0;
+function preload() {
+    // this.load.image("background", "assets/images/background/black-tile.png");
+    this.load.image("background", "assets/images/background/gray.jpg");
+    this.load.image("player-ship", "assets/images/ships/player-ship.png");
+    this.load.image("enemy-bot-ship", "assets/images/ships/enemy-ship-2.png");
+    this.load.image("enemy-hunter-ship", "assets/images/ships/enemy-hunter.png");
+    this.load.image("enemy-ufo", "assets/images/ships/enemy-ufo.png");
+    this.load.image("enemy-flyer", "assets/images/ships/enemy-flyer.png");
+    this.load.image("laser-green", "assets/images/bullets/laser-green-3.png");
+    this.load.image("laser-red", "assets/images/bullets/laser-red-2.png");
+    this.load.image("sphere-bullet", "assets/images/bullets/sphere-bullet.png");
+    this.load.image("green-explode", "assets/images/effects/green-explode.png");
+    this.load.image("red-explode", "assets/images/effects/red-explode.png");
+    this.load.image("orange-explode", "assets/images/effects/orange-explode.png");
+    this.load.image("star", "assets/images/effects/star-4.png");
+    this.load.image("fire", "assets/images/effects/fire-3.png");
+    this.load.image("comet", "assets/images/effects/comet.png");
+    this.load.image("meteor-1", "assets/images/effects/meteor-gray-1.png");
+    this.load.image("meteor-2", "assets/images/effects/meteor-gray-2.png");
+    this.load.image("meteor-3", "assets/images/effects/meteor-gray-3.png");
+    this.load.image("meteor-4", "assets/images/effects/meteor-gray-4.png");
+    // audio
+    this.load.audio("laser-1", ["assets/audio/sfx_laser1.ogg"]);
+    this.load.audio("laser-2", ["assets/audio/sfx_laser2.ogg"]);
+    // bonus
+    this.load.image("coin-bronze", "assets/images/bonus/star-bronze.png");
+    this.load.image("coin-silver", "assets/images/bonus/star-silver.png");
+}
+exports.preload = preload;
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Utils = void 0;
+const components_1 = __webpack_require__(2);
+const Coin_1 = __webpack_require__(60);
+const helpers_1 = __webpack_require__(3);
+const effects_1 = __webpack_require__(15);
+class Utils {
+    constructor(scene) {
+        this.scene = scene;
+    }
+    explode(x, y) {
+        const { scene } = this;
+        scene.effects.push(new effects_1.Explode(scene, new components_1.Vector(x, y), {
+            sprite: "orange-explode",
+        }));
+    }
+    tripleExplode(x, y) {
+        const fullCircleRange = 360;
+        const range = 30;
+        const initialAngle = (Math.random() * fullCircleRange) / 3;
+        for (let i = 0; i < 3; i++) {
+            const angle = helpers_1.angleToRadians(i * (fullCircleRange / 3) + initialAngle);
+            this.explode(x + Math.cos(angle) * range, y + Math.sin(angle) * range);
+        }
+    }
+    createBonus(x, y) {
+        const { scene } = this;
+        scene.bonuses.push(new Coin_1.Coin(scene, new components_1.Vector(x, y)));
+    }
+}
+exports.Utils = Utils;
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Coin = void 0;
+const Bonus_1 = __webpack_require__(61);
+const COIN_MAP = {
+    0: {
+        sprite: "coin-bronze",
+        cost: 5,
+    },
+    1: {
+        sprite: "coin-silver",
+        cost: 7,
+    },
+    2: {
+        sprite: "coin-gold",
+        cost: 10,
+    },
+};
+const getCoinType = () => {
+    const value = Math.random();
+    if (value > 0.5)
+        return 0;
+    if (value > 0.2)
+        return 1;
+    return 2;
+};
+class Coin extends Bonus_1.Bonus {
+    constructor(scene, pos) {
+        super(scene);
+        this.lifeTime = 5000;
+        const coinParams = COIN_MAP[getCoinType()];
+        this.cost = coinParams.cost;
+        this.body = this.scene.physics.add.image(pos.x, pos.y, coinParams.sprite);
+        this.creationTime = scene.gameTime;
+        this.init();
+    }
+    init() {
+        this.body.setDepth(10);
+        this.body.setCircle(16);
+        this.initCollisions();
+    }
+    initCollisions() {
+        const { scene } = this;
+        scene.physics.add.collider(this.body, scene.player.body, () => {
+            scene.score += this.cost;
+            this.destroy();
+        });
+    }
+    act() {
+        this.update();
+    }
+    update() {
+        const { scene, body } = this;
+        const time = scene.gameTime;
+        body.angle += Math.sin(time * 0.003) * 3;
+        if (time > this.creationTime + this.lifeTime) {
+            this.destroy();
+        }
+    }
+}
+exports.Coin = Coin;
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Bonus = void 0;
+class Bonus {
+    constructor(scene) {
+        this.scene = scene;
+    }
+    act() { }
+    destroy() {
+        const { body } = this;
+        this.scene.bonuses = this.scene.bonuses.filter((b) => b !== this);
+        body.destroy();
+    }
+}
+exports.Bonus = Bonus;
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getInitialGameData = void 0;
+const getInitialGameData = () => ({
+    totalKills: 0,
+    kills: {
+        bot: 0,
+        hunter: 0,
+        flyer: 0,
+        ufo: 0,
+    },
+});
+exports.getInitialGameData = getInitialGameData;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MenuScene = void 0;
+const colors_1 = __webpack_require__(5);
+const components_1 = __webpack_require__(2);
+const config_1 = __webpack_require__(0);
+const ui_1 = __webpack_require__(8);
+const types_1 = __webpack_require__(1);
+const Scene_1 = __webpack_require__(9);
+let globalAssetsLoaded = false;
+const CENTER_POS_X = config_1.CONFIG.width / 2;
+class MenuScene extends Scene_1.Scene {
+    constructor() {
+        super({
+            key: types_1.SceneName.menu,
+        });
+    }
+    preload() {
+        this.load.image("coin-gold", "assets/images/bonus/star-gold.png");
+        if (!globalAssetsLoaded) {
+            this.load.bitmapFont("atari", "assets/fonts/atari/bitmap/gem.png", "assets/fonts/atari/bitmap/gem.xml");
+            globalAssetsLoaded = true;
+        }
+    }
+    create() {
+        const startPosY = 155;
+        this.graphics = this.add.graphics({
+            lineStyle: { width: 2, color: colors_1.COLORS.white },
+            fillStyle: { color: colors_1.COLORS.white },
+        });
+        this.createTitle(CENTER_POS_X, startPosY);
+        this.createSubtitle(CENTER_POS_X, startPosY + 45);
+        new ui_1.UICosmons(this, {
+            pos: new components_1.Vector(CENTER_POS_X, startPosY + 90),
+            value: this.getData().score,
+            isCentered: true,
+            depth: 100,
+        });
+        this.createLevelText(CENTER_POS_X, startPosY + 90 + 75);
+        this.createStartButton(CENTER_POS_X, startPosY + 200);
+        this.createLabButton(CENTER_POS_X, startPosY + 200 + 65);
+    }
+    update() {
+        this.rainbowText.update();
+    }
+    createTitle(posX, posY) {
+        this.add.bitmapText(posX, posY, "atari", config_1.CONFIG.title, 32).setOrigin(0.5);
+    }
+    createSubtitle(posX, posY) {
+        this.rainbowText = new ui_1.UIRainbowText(this, {
+            pos: new components_1.Vector(posX, posY),
+            text: config_1.CONFIG.subtitle,
+        });
+    }
+    createLevelText(posX, posY) {
+        const currentLevel = this.getData().level;
+        const text = `Next level: ${currentLevel + 1}. ${config_1.LEVELS_CONFIG[currentLevel].title}`;
+        this.add.dynamicBitmapText(posX, posY, "atari", text, 19).setOrigin(0.5);
+    }
+    createStartButton(posX, posY) {
+        const startButton = new ui_1.UIButton(this, posX, posY, "", {
+            width: 180,
+            height: 46,
+            text: "Start game",
+        });
+        startButton.on("pointerdown", () => {
+            this.scene.start(types_1.SceneName.preview, {
+                level: this.getData().level,
+            });
+        });
+    }
+    createLabButton(posX, posY) {
+        const labButton = new ui_1.UIButton(this, posX, posY, "", {
+            width: 180,
+            height: 46,
+            text: "Lab",
+            disabled: true,
+        });
+        labButton.on("pointerdown", () => {
+            console.log("lab");
+        });
+    }
+}
+exports.MenuScene = MenuScene;
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FailScene = void 0;
+const colors_1 = __webpack_require__(5);
+const components_1 = __webpack_require__(2);
+const config_1 = __webpack_require__(0);
+const ui_1 = __webpack_require__(8);
+const types_1 = __webpack_require__(1);
+const Scene_1 = __webpack_require__(9);
+class FailScene extends Scene_1.Scene {
+    constructor() {
+        super({
+            key: types_1.SceneName.fail,
+        });
+    }
+    preload() {
+        // code
+    }
+    init(data) {
+        this.params = data;
+    }
+    create() {
+        let currentPosY = config_1.CONFIG.height / 2 - 90;
+        this.rainbowTitle = new ui_1.UIRainbowText(this, {
+            pos: new components_1.Vector(config_1.CONFIG.width / 2, currentPosY),
+            text: config_1.CONFIG.scene.failTitleText,
+            fontSize: 28,
+            color: colors_1.COLORS.red,
+        });
+        currentPosY += 20;
+        const subtitleText = new Phaser.GameObjects.BitmapText(this, config_1.CONFIG.width / 2, currentPosY, "atari", config_1.CONFIG.scene.failSubtitleText, 19);
+        subtitleText.setOrigin(0.5, 0).setCenterAlign().setTint(colors_1.COLORS.white);
+        this.add.existing(subtitleText);
+        currentPosY += 67;
+        this.createTryAgainButton(currentPosY);
+        currentPosY += 65;
+        this.createMenuButton(currentPosY);
+    }
+    update() {
+        this.rainbowTitle.update();
+    }
+    createMenuButton(posY) {
+        const menuButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 160,
+            height: 46,
+            text: "Go to menu",
+        });
+        menuButton.on("pointerdown", () => {
+            this.scene.start(types_1.SceneName.menu);
+        });
+    }
+    createTryAgainButton(posY) {
+        const tryAgainButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 160,
+            height: 46,
+            text: "Try again",
+        });
+        const gameParams = {
+            level: this.getData().level,
+        };
+        tryAgainButton.on("pointerdown", () => {
+            this.scene.start(types_1.SceneName.game, gameParams);
+        });
+    }
+}
+exports.FailScene = FailScene;
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WinScene = void 0;
+const components_1 = __webpack_require__(2);
+const config_1 = __webpack_require__(0);
+const ui_1 = __webpack_require__(8);
+const types_1 = __webpack_require__(1);
+const Scene_1 = __webpack_require__(9);
+class WinScene extends Scene_1.Scene {
+    constructor() {
+        super({
+            key: types_1.SceneName.win,
+        });
+    }
+    preload() {
+        // code
+    }
+    init(data) {
+        this.params = data;
+    }
+    create() {
+        var _a;
+        const centerPosX = config_1.CONFIG.width / 2;
+        let currentPosY = config_1.CONFIG.height / 2 - 180;
+        const globalData = this.getData();
+        const { score, isFlawlessVictory } = this.params;
+        const bestLevelScore = ((_a = globalData.levels[globalData.level]) === null || _a === void 0 ? void 0 : _a.score) || 0;
+        const flawlessVictoryScores = isFlawlessVictory ? Math.ceil(score * 0.25) : 0;
+        const totalScore = score + flawlessVictoryScores;
+        const plusScore = bestLevelScore < totalScore ? totalScore - bestLevelScore : 0;
+        const scoreParams = {
+            currentLevel: globalData.level,
+            score,
+            totalScore,
+            bestLevelScore,
+            flawlessVictoryScores,
+            plusScore,
+        };
+        this.createTitle(centerPosX, currentPosY);
+        currentPosY += 35;
+        this.createScores(centerPosX, currentPosY, scoreParams);
+        currentPosY += 170;
+        this.createNextButton(currentPosY);
+        currentPosY += 65;
+        this.createTryAgainButton(currentPosY);
+        currentPosY += 65;
+        this.createMenuButton(currentPosY);
+        this.updateGlobalData(scoreParams);
+    }
+    update() {
+        this.rainbowTitle.update();
+    }
+    createTitle(posX, posY) {
+        this.rainbowTitle = new ui_1.UIRainbowText(this, {
+            pos: new components_1.Vector(posX, posY),
+            text: config_1.CONFIG.scene.winTitleText,
+            fontSize: 28,
+        });
+    }
+    createScores(posX, posY, params) {
+        const scoresText = `Score: ${params.score}\nFlawless victory: ${params.flawlessVictoryScores}\nBest score: ${params.bestLevelScore}\nTotal score: ${params.totalScore}`;
+        const scoresBitmapText = new Phaser.GameObjects.BitmapText(this, posX, posY, "atari", scoresText, 18)
+            .setOrigin(0.5, 0)
+            .setCenterAlign();
+        this.add.existing(scoresBitmapText);
+        new ui_1.UICosmons(this, {
+            pos: new components_1.Vector(posX, posY + 120),
+            isCentered: true,
+            value: params.plusScore,
+            prefix: "+",
+            depth: 100,
+        });
+    }
+    createNextButton(posY) {
+        const currentLevel = this.getData().level;
+        const nextLevelButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 160,
+            height: 46,
+            text: "Next level",
+            disabled: config_1.CONFIG.levelsCount <= currentLevel + 1,
+        });
+        nextLevelButton.on("pointerdown", () => {
+            this.setData("level", currentLevel + 1);
+            const gameParams = {
+                level: this.getData().level,
+            };
+            this.scene.start(types_1.SceneName.preview, gameParams);
+        });
+    }
+    createTryAgainButton(posY) {
+        const tryAgainButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 160,
+            height: 46,
+            text: "Try again",
+        });
+        const gameParams = {
+            level: this.getData().level,
+        };
+        tryAgainButton.on("pointerdown", () => {
+            this.scene.start(types_1.SceneName.game, gameParams);
+        });
+    }
+    createMenuButton(posY) {
+        const globalData = this.getData();
+        const { level: currentLevel, levels } = globalData;
+        const menuButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 160,
+            height: 46,
+            text: "Go to menu",
+        });
+        menuButton.on("pointerdown", () => {
+            if (currentLevel + 1 < config_1.CONFIG.levelsCount) {
+                this.setData("level", currentLevel + 1);
+            }
+            this.scene.start(types_1.SceneName.menu);
+        });
+    }
+    updateGlobalData(params) {
+        const globalData = this.getData();
+        if (params.bestLevelScore < params.totalScore) {
+            this.setData("levels", Object.assign(Object.assign({}, globalData.levels), { [params.currentLevel]: {
+                    score: params.totalScore,
+                } }));
+            this.setData("score", globalData.score + params.plusScore);
+        }
+    }
+}
+exports.WinScene = WinScene;
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PreviewScene = void 0;
+const colors_1 = __webpack_require__(5);
+const config_1 = __webpack_require__(0);
+const ui_1 = __webpack_require__(8);
+const types_1 = __webpack_require__(1);
+const Scene_1 = __webpack_require__(9);
+class PreviewScene extends Scene_1.Scene {
+    constructor() {
+        super({
+            key: types_1.SceneName.preview,
+        });
+    }
+    init(data) {
+        this.params = data;
+    }
+    create() {
+        const { params } = this;
+        const { level } = params;
+        const { title, text, mission } = config_1.LEVELS_CONFIG[level];
+        const centerY = config_1.CONFIG.height / 2;
+        const titleText = new Phaser.GameObjects.BitmapText(this, config_1.CONFIG.width / 2, 0, "atari", `${level + 1}. ${title}`, 32);
+        titleText.setOrigin(0.5, 0).setCenterAlign();
+        const descriptionText = new Phaser.GameObjects.BitmapText(this, config_1.CONFIG.width / 2, 0, "atari", text, 18);
+        descriptionText.setMaxWidth(400).setOrigin(0.5, 0).setCenterAlign();
+        const missionText = new Phaser.GameObjects.BitmapText(this, config_1.CONFIG.width / 2, 0, "atari", mission, 18);
+        missionText.setMaxWidth(400).setOrigin(0.5, 0).setCenterAlign().setTint(colors_1.COLORS.green);
+        const totalContentHeight = titleText.height + descriptionText.height + missionText.height + 100;
+        const startY = centerY - totalContentHeight / 2 + 5;
+        titleText.y = startY - 25;
+        descriptionText.y = titleText.y + 65;
+        missionText.y = descriptionText.y + descriptionText.height + 25;
+        this.add.existing(titleText);
+        this.add.existing(descriptionText);
+        this.add.existing(missionText);
+        this.drawButton(missionText.y + missionText.height + 45);
+    }
+    drawButton(posY) {
+        const goButton = new ui_1.UIButton(this, config_1.CONFIG.width / 2, posY, "", {
+            width: 120,
+            height: 46,
+            text: "Go",
+        });
+        const gameParams = {
+            level: this.params.level,
+        };
+        goButton.on("pointerdown", () => {
+            this.scene.start(types_1.SceneName.game, gameParams);
+        });
+    }
+}
+exports.PreviewScene = PreviewScene;
+
+
+/***/ })
+/******/ ]);
