@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+canvas {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.rotate-screen-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    height: 100vh;
+    color: #fff;
+    font-size: 22px;
+}
+
+.portrait-orientation-warning .rotate-screen-overlay {
+    display: flex;
+}
+
+.screen-height-detector {
+    height: 100vh;
+    position: fixed;
+    left: -1px;
+}
