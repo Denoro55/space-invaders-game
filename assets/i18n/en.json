@@ -1,0 +1,43 @@
+{
+    "failTitle": "MISSION FAILED",
+    "failSubtitle": "Your ship was destroyed",
+    "winTitle": "MISSION COMPLETED",
+
+    "level1Title": "Red Alert",
+    "level2Title": "Hunters",
+    "level3Title": "UFO",
+    "level4Title": "Agression",
+    "level5Title": "Ghost",
+
+    "gameStart": "Start game",
+    "go": "Go",
+    "goToMenu": "Go to menu",
+    "tryAgain": "Try again",
+    "nextLevel": "Next level",
+    "next": "Next",
+    "back": "Back",
+
+    "startOfDevelopment": "Start of development",
+    "totalLevels": "Total levels",
+    "lastUpdated": "Last updated",
+
+    "score": "Score",
+    "flawlessVictory": "Flawless victory",
+    "bestScore": "Best score",
+    "totalScore": "Total score",
+
+    "mission": "Mission",
+    "destroy": "destroy",
+    "stayAliveFor": "stay alive for",
+    "winBoss": "Win boss",
+
+    "wave.plural": ["wave", "waves", "waves", "wave"],
+    "invaders.plural": ["invader", "invaders", "invaders", "invader"],
+    "bots.plural": ["bot", "bots", "bots", "bot"],
+    "hunters.plural": ["hunter", "hunters", "hunters", "hunter"],
+    "ufo.plural": ["ufo", "ufo", "ufo", "ufo"],
+    "flyers.plural": ["flyer", "flyers", "flyers", "flyer"],
+    "seconds.plural": ["second", "seconds", "seconds"],
+
+    "defeatWavesCount.template:": "Defeat {count} {wave} of enemies"
+}
