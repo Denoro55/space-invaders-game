@@ -8,6 +8,10 @@
     "level3Title": "UFO",
     "level4Title": "Agression",
     "level5Title": "Ghost",
+    "level6Title": "Flyers",
+    "level7Title": "Destroyers",
+    "level8Title": "Stealth",
+    "level9Title": "Mass attack",
 
     "gameStart": "Start game",
     "go": "Go",
@@ -37,6 +41,7 @@
     "hunters.plural": ["hunter", "hunters", "hunters", "hunter"],
     "ufo.plural": ["ufo", "ufo", "ufo", "ufo"],
     "flyers.plural": ["flyer", "flyers", "flyers", "flyer"],
+    "destroyers.plural": ["destroyer", "destroyers", "destroyers", "destroyer"],
     "seconds.plural": ["second", "seconds", "seconds"],
 
     "defeatWavesCount.template:": "Defeat {count} {wave} of enemies"
