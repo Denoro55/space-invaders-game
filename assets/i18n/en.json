@@ -12,6 +12,10 @@
     "level7Title": "Destroyers",
     "level8Title": "Stealth",
     "level9Title": "Mass attack",
+    "level10Title": "Punisher",
+    "level11Title": "Missile carriers",
+    "level12Title": "Laser ships",
+    "level13Title": "Defenders",
 
     "gameStart": "Start game",
     "go": "Go",
@@ -42,6 +46,7 @@
     "ufo.plural": ["ufo", "ufo", "ufo", "ufo"],
     "flyers.plural": ["flyer", "flyers", "flyers", "flyer"],
     "destroyers.plural": ["destroyer", "destroyers", "destroyers", "destroyer"],
+    "laser-ships.plural": ["laser ship", "laser ships", "laser ships", "laser ship"],
     "seconds.plural": ["second", "seconds", "seconds"],
 
     "defeatWavesCount.template:": "Defeat {count} {wave} of enemies"
