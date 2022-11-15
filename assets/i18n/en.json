@@ -3,6 +3,16 @@
     "failSubtitle": "Your ship was destroyed",
     "winTitle": "MISSION COMPLETED",
 
+    "rotateDevice": "Please, rotate your screen!",
+
+    "history": [
+        "The threat loomed suddenly, we were left with no choice but to...",
+        "",
+        "It was an ordinary day in 2148, humanity settled on many planets, we did not find signs of life anywhere. But as it turned out - They found us. In less than a day, 32 colonies were destroyed, one by one, and the turn fell on Earth - an old, overpopulated planet. The government has sent for you an \"Archangel\" type starship, the best in the system. You have to get behind enemy lines and destroy them.",
+        "",
+        "Time is running out!"
+    ],
+
     "level1Title": "Red Alert",
     "level2Title": "Hunters",
     "level3Title": "UFO",
@@ -19,11 +29,33 @@
 
     "gameStart": "Start game",
     "go": "Go",
-    "goToMenu": "Go to menu",
+    "goToMenu": "Menu",
     "tryAgain": "Try again",
     "nextLevel": "Next level",
     "next": "Next",
+    "next2": "Next",
     "back": "Back",
+    "watch": "Watch",
+    "exit": "Exit",
+    "contacts": "Contacts",
+    "store": "Store",
+    "leaderboard": "Records",
+    "weapons": "Weapons",
+    "ships": "Ships",
+    "boosters": "Boosters",
+    "buy": "Buy",
+    "description": "Description",
+    "moreDetails": "More",
+    "characteristics": "Characteristics",
+    "soon": "Soon!",
+    "noDescription": "No description",
+    "anonymousShip": "Anonymous ship",
+    "maximum": "Maximum",
+    "workshop": "Workshop",
+    "rankedBosses": "Ranked bosses",
+    "wait": "I'm waiting!",
+    "finalVictory": "Thanks for playing! \nYou've been able to defeat quite a few enemies along the way. But your journey is not over... \n\nNext levels are already in development :)",
+    "thanksForWaiting": "Thank you! The more players waiting for new levels, the faster they will be ready!",
 
     "startOfDevelopment": "Start of development",
     "totalLevels": "Total levels",
@@ -40,7 +72,7 @@
     "winBoss": "Win boss",
 
     "wave.plural": ["wave", "waves", "waves", "wave"],
-    "invaders.plural": ["invader", "invaders", "invaders", "invader"],
+    "invaders.plural": ["enemy ship", "enemy ships", "enemy ships", "enemy ship"],
     "bots.plural": ["bot", "bots", "bots", "bot"],
     "hunters.plural": ["hunter", "hunters", "hunters", "hunter"],
     "ufo.plural": ["ufo", "ufo", "ufo", "ufo"],
@@ -49,5 +81,29 @@
     "laser-ships.plural": ["laser ship", "laser ships", "laser ships", "laser ship"],
     "seconds.plural": ["second", "seconds", "seconds"],
 
-    "defeatWavesCount.template:": "Defeat {count} {wave} of enemies"
+    "defeatWavesCount.template:": "Defeat {count} {wave} of enemies",
+    "contactDeveloper.template": "For all questions and wishes about the game, write to the mail: {email}",
+
+    "rewardedModal": "Watch the ad and keep playing!",
+    "adLoading": "Please, wait! Ads are loading...",
+
+    "loadingGameResources": "Loading game resources...",
+    "loadingLeaderboards": "Loading leaderboards...",
+    "loadingLeaderboardsError": "Failed to load :(",
+
+    "maxHealth": "Maximum health",
+    "damage": "Damage",
+    "movementSpeed": "Movement speed",
+    "attackSpeed": "Attack speed",
+    "explosionResistance": "Eplosion resistance",
+    "bonusesTime": "Bonuses time",
+    "fortune": "Fortune",
+
+    "maxHealthDescription": "Increases maximum health by 10. Base value: 100",
+    "damageDescription": "Increases damage by 2. Base value: 10",
+    "movementSpeedDescription": "Increases movement speed by 0.5. Base value: 5",
+    "attackSpeedDescription": "Increases attack speed by 15. Base value: 320",
+    "explosionResistanceDescription": "Reduces damage from ship and rocket explosions by 10%. \n Base value: 0%",
+    "bonusesTimeDescription": "Increases the duration of bonuses by 2 seconds. \n Base value: 20 sec.",
+    "fortuneDescription": "Increases the chance of stars falling from ships by 5%. \n Base value: 50%"
 }
