@@ -99,11 +99,11 @@
     "bonusesTime": "Bonuses time",
     "fortune": "Fortune",
 
-    "maxHealthDescription": "Increases maximum health by 10. Base value: 100",
-    "damageDescription": "Increases damage by 2. Base value: 10",
-    "movementSpeedDescription": "Increases movement speed by 0.5. Base value: 5",
-    "attackSpeedDescription": "Increases attack speed by 15. Base value: 320",
-    "explosionResistanceDescription": "Reduces damage from ship and rocket explosions by 10%. \n Base value: 0%",
+    "maxHealthDescription": "Increases maximum health by 10. \nBase value: 100",
+    "damageDescription": "Increases damage by 20%.",
+    "movementSpeedDescription": "Increases movement speed by 10%.",
+    "attackSpeedDescription": "Increases attack speed by 10%.",
+    "explosionResistanceDescription": "Reduces damage from ship and rocket explosions by 10%.",
     "bonusesTimeDescription": "Increases the duration of bonuses by 2 seconds. \n Base value: 20 sec.",
     "fortuneDescription": "Increases the chance of stars falling from ships by 5%. \n Base value: 50%"
 }
