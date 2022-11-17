@@ -12,6 +12,8 @@
         "",
         "Time is running out!"
     ],
+    "controlsDescription": "Control the movement of the ship using the arrow keys or the WASD keys. Use the left mouse button to shoot. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved, however, if the mission fails, you will start playing from level 1. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels without fails. \nRestart the game to see the description again.",
+    "controlsDescriptionMobile": "The bottom left part of the screen is responsible for the movement of the ship. Any other part of the screen is responsible for the rotation. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved, however, if the mission fails, you will start playing from level 1. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels without fails. \nRestart the game to see the description again.",
 
     "level1Title": "Red Alert",
     "level2Title": "Hunters",
