@@ -104,7 +104,7 @@
 
     "maxHealthDescription": "Увеличивает максимальное здоровье на 10 ед. \n Базовое значение: 100 ед.",
     "damageDescription": "Увеличивает урон на 20%.",
-    "movementSpeedDescription": "Увеличивает скорость движения на 10%.",
+    "movementSpeedDescription": "Увеличивает скорость передвижения на 10%.",
     "attackSpeedDescription": "Увеличивает скорость атаки на 10%.",
     "explosionResistanceDescription": "Снижает урон от взрывов кораблей и ракет на 10%.",
     "bonusesTimeDescription": "Увеличивает время действия бонусов на 2 сек. \n Базовое значение: 20 сек.",
