@@ -56,7 +56,14 @@
     "workshop": "Workshop",
     "rankedBosses": "Ranked bosses",
     "wait": "I'm waiting!",
-    "finalVictory": "Thanks for playing! \nOn your way, you were able to defeat many enemies. But your journey is not over... \n\nNext levels are already in development :)",
+    "finalVictory": [
+        "Thanks for playing!",
+        "You were able to defeat a lot of enemies, but your journey is not over...",
+        "We are already exploring a further course and preparing new guns for your ship.",
+        "Get ready, it won't be easy!",
+        "",
+        "The next levels are already in development :)"
+    ],
     "thanksForWaiting": "Thank you! The more players waiting for new levels, the faster they will be ready!",
 
     "startOfDevelopment": "Start of development",
