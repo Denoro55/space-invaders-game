@@ -83,7 +83,7 @@
     "laser-ships.plural": ["laser ship", "laser ships", "laser ships", "laser ship"],
     "seconds.plural": ["second", "seconds", "seconds"],
 
-    "defeatWavesCount.template:": "Defeat {count} {wave} of enemies",
+    "defeatWavesCount.template": "Defeat {count} {wave} of enemies",
     "contactDeveloper.template": "For all questions and wishes about the game, write to the mail: {email}",
 
     "rewardedModal": "Watch the ad and keep playing!",
