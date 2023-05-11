@@ -2,6 +2,7 @@
     "failTitle": "MISSION FAILED",
     "failSubtitle": "Your ship was destroyed",
     "winTitle": "MISSION COMPLETED",
+    "survivalTitle": "SURVIVAL RESULTS",
 
     "rotateDevice": "Please, rotate your screen!",
 
@@ -14,6 +15,7 @@
     ],
     "controlsDescription": "Control the movement of the ship using the arrow keys or the WASD keys. Use the left mouse button to shoot. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels. \n\nRestart the game to see the description again.",
     "controlsDescriptionMobile": "The bottom left part of the screen is responsible for the movement of the ship. Any other part of the screen is responsible for the rotation. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved, however. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels. \n\nRestart the game to see the description again.",
+    "survivalDescription": "In survival mode, you will only encounter enemies that you have discovered during the passage of the story. \nMaximum difficulty depends on your level.\nWhen you finish a level, you will still receive the reward you earned.",
 
     "level1Title": "Red Alert",
     "level2Title": "Hunters",
@@ -28,7 +30,9 @@
     "level11Title": "Missile carriers",
     "level12Title": "Laser ships",
     "level13Title": "Defenders",
+    "level14Title": "Attack titan",
 
+    "attention": "Attention",
     "gameStart": "Start game",
     "go": "Go",
     "goToMenu": "Menu",
@@ -41,6 +45,7 @@
     "exit": "Exit",
     "contacts": "Contacts",
     "store": "Store",
+    "survival": "Survival",
     "leaderboard": "Leaderboards",
     "weapons": "Weapons",
     "ships": "Ships",
@@ -70,10 +75,16 @@
     "totalLevels": "Total levels",
     "lastUpdated": "Last updated",
 
+    "level": "Level",
     "score": "Score",
     "flawlessVictory": "Flawless victory",
     "bestScore": "Best score",
     "totalScore": "Total score",
+    "totalStars": "Total stars",
+    "killed": "Killed",
+    "time": "Time",
+    "stars": "Stars",
+    "playerLevel": "Player level",
 
     "mission": "Mission",
     "destroy": "destroy",
@@ -95,6 +106,8 @@
 
     "rewardedModal": "Watch the ad and keep playing!",
     "adLoading": "Please, wait! Ads are loading...",
+
+    "chooseLeaderboard": "Select the desired leaderboard from the list",
 
     "loadingGameResources": "Loading game resources...",
     "loadingLeaderboards": "Loading leaderboards...",

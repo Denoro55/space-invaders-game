@@ -18,6 +18,13 @@ canvas {
     font-style: normal;
 }
 
+@font-face {
+    font-family: Roboto;
+    src: url("../assets/fonts/roboto/Roboto-Medium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 .hidden {
     display: none !important;
 }
