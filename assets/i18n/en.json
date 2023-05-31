@@ -15,7 +15,8 @@
     ],
     "controlsDescription": "Control the movement of the ship using the arrow keys or the WASD keys. Use the left mouse button to shoot. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels. \n\nRestart the game to see the description again.",
     "controlsDescriptionMobile": "The bottom left part of the screen is responsible for the movement of the ship. Any other part of the screen is responsible for the rotation. Your health is displayed at the top left. The status of the mission is displayed at the top right. Flawless victory can be obtained by completing a mission with full health. In this case, your reward will be increased by x1.5. During the game, you can see the appearance of a blue flying sphere. Hit it 4 times and get a reward. All gameplay is saved, however. Get points for collecting stars after destroying ships, spheres and bosses, upgrade your ship and complete all levels. \n\nRestart the game to see the description again.",
-    "survivalDescription": "In survival mode, you will only encounter enemies that you have discovered during the passage of the story. \nMaximum difficulty depends on your level.\nWhen you finish a level, you will still receive the reward you earned.",
+    "survivalDescription": "Are you ready to test your skills and challenge other players? \nIn this game mode, you will have to show all your fighting skills in order to take the best place in the leaderboard. Earn as many points as you can by destroying enemy ships and show everyone what you can do.\n\n Here you will find only those ships that you have discovered in the main missions.\n The maximum survival time will be limited until you complete all missions.",
+    "needAuth": "Only available to authorized players!",
 
     "level1Title": "Red Alert",
     "level2Title": "Hunters",
@@ -47,6 +48,7 @@
     "contacts": "Contacts",
     "store": "Store",
     "survival": "Survival",
+    "survivalMode": "Survival mode",
     "leaderboard": "Leaderboards",
     "weapons": "Weapons",
     "ships": "Ships",
@@ -62,6 +64,7 @@
     "workshop": "Workshop",
     "rankedBosses": "Ranked bosses",
     "wait": "I'm waiting!",
+    "chooseLevel": "Choose level",
     "finalVictory": [
         "Thanks for playing!",
         "You were able to defeat a lot of enemies, but your journey is not over...",
